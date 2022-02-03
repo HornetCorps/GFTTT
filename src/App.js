@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-
+import Navbar from './components/Navbar';
+import {Routes, Route} from 'react-router-dom';
+import Home from './components/pages/home';
+import Community from './components/pages/community';
+import Inventory from './components/pages/inventory';
+import Play from './components/pages/play';
+import Profile from './components/pages/profile';
+import Tools from './components/pages/tools';
+import Footer from './components/Footer';
+import Help  from './components/pages/help';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/community' exact element={<Community />}/>
+          <Route path='/help' exact element={<Help />}/>
+          <Route path='/inventory' exact element={<Inventory />}/>
+          <Route path='/play' exact element={<Play />}/>
+          <Route path='/profile' exact element={<Profile />}/>
+          <Route path='/tools' exact element={<Tools />}/>
+
+        </Routes>
+        
+        <Footer />
+    </>
   );
 }
 

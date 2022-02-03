@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home,
+.inventory,
+.tools,
+.play,
+.community,
+.profile,
+.help,
+.play {
+  background-image: url(./components/images/img-7.jpg);
+  height: 93vh;
+  width: 100%;
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+  padding-top: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.inventory {
+  background-image: url(./components/images/img-3.jpg);
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.tools {
+  background-image: url(./components/images/img-2.jpg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.community {
+  background-image: url(./components/images/img-4.jpg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile {
+  background-image: url(./components/images/img-5.jpg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.help {
+  background-image: url(./components/images/img-6.jpg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit:contain;
+
+  background-repeat: no-repeat;
+  background-size: cover;
 }
