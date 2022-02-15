@@ -10,6 +10,8 @@ import Profile from './components/pages/profile';
 import Tools from './components/pages/tools';
 import Footer from './components/Footer';
 import Help  from './components/pages/help';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
 function App() {
   return (
     <>
@@ -22,6 +24,8 @@ function App() {
           <Route path='/play' exact element={<Play />}/>
           <Route path='/profile' exact element={<Profile />}/>
           <Route path='/tools' exact element={<Tools />}/>
+          <Route path='/login' exact element={<Login />}/>
+          <Route path='/register' exact element={<Register />}/>
 
         </Routes>
         
