@@ -10,12 +10,10 @@ export default function Register() {
     <label>Username</label>
     <input type="text" />
     <label>Password</label>
-    <input type="text" />
+    <input type="password"/>
+    <label>Re-Enter Password</label>
+    <input type="password" />
     <button>Register</button>
-    
-    
-    
-    
-    
+
     </div>
 }
