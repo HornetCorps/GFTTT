@@ -1,0 +1,35 @@
+.register > h1 {
+  color: #eda800;
+  margin-top: 125px;
+  margin-bottom: 50px;
+  font-size: 50px;
+}
+
+.register > label {
+  color: #eda800;
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.register > input {
+  width: 500px;
+  height: 4vh;
+  text-align: center;
+  background-color: grey;
+  font-size: 25px;
+}
+
+.register > button {
+  width: 100px;
+  height: 4vh;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #eda800;
+  font-size: 17px;
+  text-align: center;
+}
