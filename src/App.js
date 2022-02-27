@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Help  from './components/pages/help';
 import Login from './components/pages/login';
 import Register from './components/pages/register';
+import BuildCharacter from './components/pages/buildCharacter';
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route path='/tools' exact element={<Tools />}/>
           <Route path='/login' exact element={<Login />}/>
           <Route path='/register' exact element={<Register />}/>
+          <Route path='/buildCharacter' exact element={<BuildCharacter />}/>
 
         </Routes>
         
