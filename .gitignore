@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#misc folders files
+/server/node_modules
+/server/ca-certificate.crt1.txt
+/server/.env
