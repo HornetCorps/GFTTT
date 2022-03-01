@@ -1,0 +1,42 @@
+:root {
+  --primary: #eda800;
+}
+
+.buildbtn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.buildbtn--primary {
+  background-color: transparent;
+  color: #eda800;
+  border: 1px solid var(--primary);
+}
+
+.buildbtn--outline {
+  background-color: transparent;
+  color: #eda800;
+  padding: 8px 20px;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-out;
+}
+
+.buildbtn--medium {
+  padding: 8px 20px;
+  font-size: 20px;
+}
+
+.buildbtn--large {
+  padding: 12px 26px;
+  font-size: 20px;
+}
+
+.buildbtn--medium:hover,
+.buildbtn--large:hover {
+  background: #242424;
+  color: #af111c;
+  transition: all 0.3s ease-out;
+}
