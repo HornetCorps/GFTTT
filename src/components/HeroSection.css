@@ -1,26 +1,28 @@
 .hero-container {
-    /*background-color : black;*/
-    background-image: url(./images/img-1.jpg);
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
-    object-fit:contain;
-    padding-top: 200px;
+  /*background-color : black;*/
+  background-image: url(./images/img-1.jpg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+  padding-top: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero-container > h1 {
-    color: #EDA800;
-    font-size: 100px;
-    margin-top: -150px;
-    margin-bottom: 100px;
+  color: #eda800;
+  font-size: 100px;
+  margin-top: -150px;
+  margin-bottom: 100px;
 }
 
 .hero-container > p {
-    color: #EDA800;
-    font-size: 30px;
-    margin-top: -70px;
-    margin-bottom: 50px;
+  color: #eda800;
+  font-size: 30px;
+  margin-top: -70px;
+  margin-bottom: 50px;
 }
