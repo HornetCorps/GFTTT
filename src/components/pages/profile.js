@@ -4,7 +4,8 @@ import './profile.css';
 import profilePlaceHolder from '../images/profilePlaceHolder.jpg';
 
 export default function Profile() {
-    return <div class="BoxWrapper">
+    return <div class="profile">
+        <div class="BoxWrapper">
             <div id="Box1">
                 <img class="profilePlaceHolder" src={profilePlaceHolder} alt="icon of a cute goblin"/>
             </div>
@@ -19,4 +20,5 @@ export default function Profile() {
                 </div>
             </div>
         </div>
+    </div>
 }
