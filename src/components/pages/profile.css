@@ -1,0 +1,35 @@
+.BoxWrapper {
+    margin-top: 40px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.DisplayName {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+#Box1 {
+    width: 250px;
+    height: 250px;
+    margin-left: 20%;
+}
+
+#Box2 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 20%;
+}
+
+#Box3 {
+    display: flex;
+}
+
+#Box4 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
