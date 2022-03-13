@@ -28,7 +28,7 @@ export default function Login() {
         })
         .then(res => {
             if(res.status === 404){
-                window.alert("Invalid user");
+                window.alert("Invalid user or password");
                 navigate("/login");
             }
             if(res.status === 200){

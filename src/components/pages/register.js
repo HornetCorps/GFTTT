@@ -19,6 +19,11 @@ export default function Register() {
             return;
         }
 
+        if(password.length <= 8){
+            window.alert("Passwords must be at least 8 characters");
+            return;
+        }
+
         await fetch("http://localhost:5000/api/register", {
           method: "POST",
           headers: {
@@ -33,7 +38,7 @@ export default function Register() {
                 navigate("/login");
             }
             if(res.status === 200){
-                //window.alert("Registation successful");
+                window.alert("Registation successful");
                 navigate("/profile");
             }
         })

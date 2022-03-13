@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-// Connection URI
+// DB Connection URI
 const uri = process.env.DB_URL
 
 // Create a new MongoClient
@@ -8,6 +8,7 @@ const { MongoClient } = require("mongodb");
 const client = new MongoClient(uri);
 
 // Setting up express server and api with cors endpoints
+const bcrypt = require('bcryptjs');
 const express = require("express");
 const cors = require('cors');
 const app = express();
@@ -27,27 +28,32 @@ app.post('/api/login', cors(), (req, res)=>{
     if (err) throw err
     const db = client.db('userinfo')
     db.collection('email-user-pass').findOne(
-      {
-        $and: [ { username: username }, { password: password } ]
-      },
+      {username: username}
     ).then(user=>{
-      if(user){
-        //user exists
-        var cursor = db.collection('email-user-pass').find({ 
-          username: username,
-          password: password
-        });
-        cursor.forEach(
-          function iterateFunc(doc) {
-            //console.log(doc);
-            res.json(doc.username);
-          }
-        );
-      }
       if(!user){
         return res.status(404).json();
       }
-    })
+      if(user){
+        //if user exists, checks hashed password
+        var hash = user.password;
+        const isPassword = bcrypt.compareSync(password, hash); //returns true if password is correct
+        if(!isPassword){
+          return res.status(404).json();
+        }
+        if(isPassword){
+          //user and password is correct
+          var cursor = db.collection('email-user-pass').find({ 
+            username: username
+          });
+          cursor.forEach(
+            function iterateFunc(doc) {
+              //console.log(doc);
+              res.json(doc.username);
+            }
+          );
+        }
+      }
+    });
   })
 });
 
@@ -68,18 +74,20 @@ app.post('/api/register', cors(), (req, res)=>{
         return res.status(422).json();
       }
       if(!user){
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+        db.collection('email-user-pass').updateOne(
+          {
+            $or: [ { email:email }, { username: username } ]
+          },
+          {
+            $setOnInsert: {email: email, username: username, password: hash}
+          },
+          {upsert: true}
+        )
         res.json();
       }
     })
-    db.collection('email-user-pass').updateOne(
-      {
-        $or: [ { email:email }, { username: username } ]
-      },
-      {
-        $setOnInsert: {email: email, username: username, password: password}
-      },
-      {upsert: true}
-    )
   })
 })
 
