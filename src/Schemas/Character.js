@@ -4,25 +4,27 @@ const raceSchema = require("./Race")
 const skillSchema = require("./Skill")
 const diceSchema = require("./Dice")
 const proficiencySchema = require("./Proficiency")
+const subraceSchema = require('./Subrace')
+const classSchema = require('./Class')
+const subclassSchema = require('./Subclass')
+const backgroundSchema = require('./Background')
+const featSchema = require('./Feats')
 
 const characterSchema = new Schema({
     name: { type: String, required: true }, // String is shorthand for {type: String}
-    race: { type: raceSchema },
-    class: {
-        name: String,
-        description: String,
-        hit_die: diceSchema, // Common hit-die object
-        primary_ability: [ skillSchema ],
-        proficiencies: [ proficiencySchema ]
-    },
     level: Number,
-    attributes: {
-        strength: {base: Number, modifier: Number},
-        dexterity: {base: Number, modifier: Number},
-        constitution: {base: Number, modifier: Number},
-        intelligence: {base: Number, modifier: Number},
-        wisdom: {base: Number, modifier: Number},
-        charisma: {base: Number, modifier: Number},
+    race: { type: raceSchema },
+    subrace: {type: subraceSchema, required: false},
+    class: { type: classSchema, required: true},
+    subclass: { type: subclassSchema, required: false},
+    background: {type: backgroundSchema, required: true},
+    ability_scores: {
+        strength: {base: Number, modifier: Number, adjustments: [featSchema]},
+        dexterity: {base: Number, modifier: Number, adjustments: [featSchema]},
+        constitution: {base: Number, modifier: Number, adjustments: [featSchema]},
+        intelligence: {base: Number, modifier: Number, adjustments: [featSchema]},
+        wisdom: {base: Number, modifier: Number, adjustmenst: [featSchema]},
+        charisma: {base: Number, modifier: Number, adjustments: [featSchema]},
     },
     skills: {
         acrobatics: skillSchema,
@@ -44,14 +46,11 @@ const characterSchema = new Schema({
         stealth: skillSchema,
         survival: skillSchema
     },
-    proficiencies: [ proficiencySchema ],
-    traits: String,
-    backstory: String,
-    alignment: String,
     equipment: [String],
     features: [{
         name: String,
-        level: Number
+        description: String,
+        mechanical_changes: [String]
     }],
     isIncomplete: Boolean,
 });

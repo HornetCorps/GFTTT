@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const featSchema = require("./Feats")
+const equipmentSchema = require("./Equipment");
 
-const raceSchema = new Schema({
+const subclassSchema = new Schema({
     name: String,
-    traits: [featSchema],
-    size: Number,
-    speed: Number,
     proficiencies: [
         {
             subject: {type: String, required: true},
             modifier: {type: Number, required: false}
         }
     ],
+    equipment: [equipmentSchema],
+    feats: [featSchema]
 })
 
-module.exports = mongoose.model("Race", raceSchema)
+module.exports = mongoose.model("Subclass", subclassSchema)

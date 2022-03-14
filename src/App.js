@@ -13,6 +13,7 @@ import Help  from './components/pages/help';
 import Login from './components/pages/login';
 import Register from './components/pages/register';
 import BuildCharacter from './components/pages/buildCharacter';
+import ViewCharacter from "./components/pages/viewCharacter";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
           <Route path='/login' exact element={<Login />}/>
           <Route path='/register' exact element={<Register />}/>
           <Route path='/buildCharacter' exact element={<BuildCharacter />}/>
+          <Route path='/viewCharacter' exact element={<ViewCharacter />}/>
 
         </Routes>
         

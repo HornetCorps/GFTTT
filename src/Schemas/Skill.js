@@ -13,8 +13,8 @@ const skillSchema = new Schema({
         type: Number,
         required: true
     },
-    isModified: {
-        type: Boolean,
+    proficiency: {
+        type: Number,
         required: true
     }
 })

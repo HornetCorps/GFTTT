@@ -2,11 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const featSchema = require("./Feats")
 
-const raceSchema = new Schema({
+const subraceSchema = new Schema({
     name: String,
     traits: [featSchema],
-    size: Number,
-    speed: Number,
     proficiencies: [
         {
             subject: {type: String, required: true},
@@ -15,4 +13,4 @@ const raceSchema = new Schema({
     ],
 })
 
-module.exports = mongoose.model("Race", raceSchema)
+module.exports = mongoose.model("Subrace", subraceSchema)
