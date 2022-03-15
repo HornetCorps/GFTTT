@@ -14,8 +14,9 @@ const skillSchema = new Schema({
         required: true
     },
     proficiency: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        enum: ['none', 'half', 'proficient', 'expert']
     }
 })
 
