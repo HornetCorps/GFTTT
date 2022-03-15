@@ -20,7 +20,7 @@ export const ViewButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
-        <Link to='/viewCharacter' className='viewbtn-mobile'>
+        <Link to='/vewCharacter' className='viewbtn-mobile'>
             <button
             className={`viewbtn ${checkButtonStyle} ${checkButtonSize}`}
             onClick={onClick}

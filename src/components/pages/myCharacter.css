@@ -1,0 +1,27 @@
+.my-character { 
+    height: 180px; 
+    width: 400px; 
+    background-color: white;
+}
+
+.character {
+    display: flex;
+    flex-direction: column;
+}
+
+.character-image-name { 
+    display: flex;
+    flex-direction: row;
+}
+
+#character-name { 
+    margin: 15px; 
+}
+
+#button { 
+    height: 80px; 
+    width: 375px; 
+    justify-content: center;
+    display: flex; 
+    flex-direction: row;
+}
