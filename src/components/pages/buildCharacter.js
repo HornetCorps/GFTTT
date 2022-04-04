@@ -73,7 +73,7 @@ export default function BuildCharacter() {
                                     equipment, personalityTraits, ideals, bonds, flaws, featsTraits
                                  };
         e.preventDefault();
-
+         /*
         if ( characterName == null || charClass == null || level == null ||  race == null ||  background == null ||  alignment == null ||  experience == null || 
             playerName == null ||  strength == null ||  dexterity == null ||  constitution == null ||  intelligence == null ||  wisdom == null ||  charisma == null || 
             armorClass == null ||  initiative == null ||  speed == null ||  acrobatics == null ||  animalHandling == null ||  arcana == null ||  athletics == null || 
@@ -84,6 +84,20 @@ export default function BuildCharacter() {
                 window.alert("All fields required.");
                 return;
             }
+        */
+
+            await fetch("http://localhost:5000/api/buildCharacter-create", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(buildCharacterSave),
+            })
+            .catch(error => {
+                window.alert(error);
+                return;
+            });
 
             window.alert("save sucessful");
 
