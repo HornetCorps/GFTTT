@@ -8,8 +8,4 @@ const diceSchema = new Schema({
     }
 })
 
-diceSchema.methods.diceName = function () {
-    return 'd' + toString(${this.value});
-}
-
 module.exports = mongoose.model("Dice", diceSchema)

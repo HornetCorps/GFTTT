@@ -85,6 +85,13 @@ export default function BuildCharacter() {
                 return;
             }
         */
+        for (const key in buildCharacterSave) {
+            if (buildCharacterSave[key] == null) {
+                window.alert("All fields required.");
+                return;
+            }
+        }
+        console.log(typeof buildCharacterSave);
 
             await fetch("http://localhost:5000/api/buildCharacter-create", {
                 method: "POST",
@@ -161,7 +168,7 @@ export default function BuildCharacter() {
                     />
                     Experience Points: 
                     <input 
-                        type ="text" 
+                        type ="text"
                         class="characterExperience"
                         onChange={(e) => {
                             setExperience(e.target.value);
@@ -181,7 +188,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={strLogo} alt="Strength" />
                         <h2>Strength</h2>
                         <input 
-                            type="text"  
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setStrength(e.target.value);
@@ -191,7 +198,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={dexLogo} alt="Dexterity" />
                         <h2>Dexterity</h2>
                         <input 
-                            type="text"  
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setDexterity(e.target.value);
@@ -201,7 +208,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={conLogo} alt="Constitution" />
                         <h2>Constitution</h2>
                         <input 
-                            type="text" 
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setConstitution(e.target.value);
@@ -211,7 +218,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={intLogo} alt="Intelligence" />
                         <h2>Intelligence</h2>
                         <input 
-                            type="text" 
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setIntelligence(e.target.value);
@@ -221,7 +228,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={wisLogo} alt="Wisdom" />
                         <h2>Wisdom</h2>
                         <input 
-                            type="text"  
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setWisdom(e.target.value);
@@ -231,7 +238,7 @@ export default function BuildCharacter() {
                         <img class="statIcon" src={chaLogo} alt="Charisma" />
                         <h2>Charisma</h2>
                         <input 
-                            type="text" 
+                            type="text"
                             class ="stats"
                             onChange={(e) => {
                                 setCharisma(e.target.value);
@@ -251,7 +258,7 @@ export default function BuildCharacter() {
                             />
                             <h2>Initiative</h2>
                             <input 
-                                type="text" 
+                                type="text"
                                 class ="stats"
                                 onChange={(e) => {
                                     setInitiative(e.target.value);
@@ -260,7 +267,7 @@ export default function BuildCharacter() {
                             <br />
                             <h2>Speed</h2>
                             <input 
-                                type="text" 
+                                type="text"
                                 class ="stats"
                                 onChange={(e) => {
                                     setSpeed(e.target.value);
@@ -271,7 +278,7 @@ export default function BuildCharacter() {
                         <div id="box6">
                             <h2 class="skillsTitle">Skills</h2>
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setAcrobatics(e.target.value);
@@ -279,7 +286,7 @@ export default function BuildCharacter() {
                             />
                             Acrobatics <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setAnimalHandling(e.target.value);
@@ -287,7 +294,7 @@ export default function BuildCharacter() {
                             />
                             Animal Handling <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setArcana(e.target.value);
@@ -295,7 +302,7 @@ export default function BuildCharacter() {
                             />
                             Arcana <br/>
                             <input 
-                                type="text"  
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setAthletics(e.target.value);
@@ -303,7 +310,7 @@ export default function BuildCharacter() {
                             />
                             Athletics <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setDeception(e.target.value);
@@ -311,7 +318,7 @@ export default function BuildCharacter() {
                             />
                             Deception <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setHistory(e.target.value);
@@ -319,7 +326,7 @@ export default function BuildCharacter() {
                             />
                             History <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setInsight(e.target.value);
@@ -327,7 +334,7 @@ export default function BuildCharacter() {
                             />
                             Insight <br />
                             <input 
-                                type="text"  
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setIntimidation(e.target.value);
@@ -335,7 +342,7 @@ export default function BuildCharacter() {
                             />
                             Intimidation <br/>
                             <input 
-                                type="text"  
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setInvestigation(e.target.value);
@@ -343,7 +350,7 @@ export default function BuildCharacter() {
                             />
                             Investigation <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setMedicine(e.target.value);
@@ -351,7 +358,7 @@ export default function BuildCharacter() {
                             />
                             Medicine <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setNature(e.target.value);
@@ -359,7 +366,7 @@ export default function BuildCharacter() {
                             />
                             Nature <br />
                             <input 
-                                type="text"  
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setPerception(e.target.value);
@@ -367,7 +374,7 @@ export default function BuildCharacter() {
                             />
                             Perception <br />
                             <input 
-                                type="text"  
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setPerformance(e.target.value);
@@ -375,7 +382,7 @@ export default function BuildCharacter() {
                             />
                             Performance <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setPersuasion(e.target.value);
@@ -383,7 +390,7 @@ export default function BuildCharacter() {
                             />
                             Persuasion <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setReligion(e.target.value);
@@ -391,7 +398,7 @@ export default function BuildCharacter() {
                             />
                             Religion <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setSleightOfHand(e.target.value);
@@ -399,7 +406,7 @@ export default function BuildCharacter() {
                             />
                             Sleight of Hand <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setStealth(e.target.value);
@@ -407,7 +414,7 @@ export default function BuildCharacter() {
                             />
                             Stealth <br />
                             <input 
-                                type="text" 
+                                type="text"
                                 class="skills"
                                 onChange={(e) => {
                                     setSurvival(e.target.value);
