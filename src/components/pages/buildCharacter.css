@@ -35,12 +35,17 @@
   flex-direction: row;
 }
 
-#box4 {
+#AbScorePane {
   flex-grow: 0.3;
   flex-direction: column;
   text-align: center;
   display: table;
   margin-right: 40px;
+}
+
+#AbScoreTopBar {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .middle-column {
@@ -251,4 +256,10 @@
   font-size: 17px;
   text-align: center;
   align-content: center;
+}
+
+.editButton {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
