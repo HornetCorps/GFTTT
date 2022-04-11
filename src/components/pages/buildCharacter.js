@@ -17,6 +17,13 @@ export default function BuildCharacter() {
     const [experience, setExperience] = useState();
     const [playerName, setPlayerName] = useState();
     // AbScores were here
+    const [strength, setStrength] = useState(10);
+    const [dexterity, setDexterity] = useState(10);
+    const [constitution, setConstitution] = useState(10);
+    const [intelligence, setIntelligence] = useState(10);
+    const [wisdom, setWisdom] = useState(10);
+    const [charisma, setCharisma] = useState(10);
+
     const [armorClass, setArmorClass] = useState();
     const [initiative, setInitiative] = useState();
     const [speed, setSpeed] = useState();
@@ -163,7 +170,14 @@ export default function BuildCharacter() {
                     />
                 </div>
                 <div id="box3">
-                    <AbScorePane />
+                    <AbScorePane
+                      str={[strength, setStrength]}
+                      dex={[dexterity, setDexterity]}
+                      con={[constitution, setConstitution]}
+                      int={[intelligence, setIntelligence]}
+                      wis={[wisdom, setWisdom]}
+                      cha={[charisma, setCharisma]}
+                    />
                     <div id="middle-column">
                         <div id="box5">
                             <img class="statIcon" src={armLogo} alt="Armor Class" />

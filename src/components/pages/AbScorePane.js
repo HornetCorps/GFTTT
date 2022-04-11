@@ -18,23 +18,16 @@ const rollScore = (() => {
 
 const modOf = ((x) => Math.floor((x-10)/2));
 
-export default function AbScorePane() {
-  const [strength, setStrength] = useState(10);
-  const [dexterity, setDexterity] = useState(10);
-  const [constitution, setConstitution] = useState(10);
-  const [intelligence, setIntelligence] = useState(10);
-  const [wisdom, setWisdom] = useState(10);
-  const [charisma, setCharisma] = useState(10);
+export default function AbScorePane({str, dex, con, int, wis, cha}) {
 
   const [editing, setEditing] = useState(false);
-
   const scores = [
-    {name: "Strength", logo: strLogo, val: strength, updater: setStrength},
-    {name: "Dexterity", logo: dexLogo, val: dexterity, updater: setDexterity},
-    {name: "Constitution", logo: conLogo, val: constitution, updater: setConstitution},
-    {name: "Intelligence", logo: intLogo, val: intelligence, updater: setIntelligence},
-    {name: "Wisdom", logo: wisLogo, val: wisdom, updater: setWisdom},
-    {name: "Charisma", logo: chaLogo, val: charisma, updater: setCharisma}
+    {name: "Strength", logo: strLogo, val: str[0], updater: str[1]},
+    {name: "Dexterity", logo: dexLogo, val: dex[0], updater: dex[1]},
+    {name: "Constitution", logo: conLogo, val: con[0], updater: con[1]},
+    {name: "Intelligence", logo: intLogo, val: int[0], updater: int[1]},
+    {name: "Wisdom", logo: wisLogo, val: wis[0], updater: wis[1]},
+    {name: "Charisma", logo: chaLogo, val: cha[0], updater: cha[1]}
   ];
 
   function AbScoreTopBar() {
