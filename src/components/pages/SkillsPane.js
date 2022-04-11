@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
+import editIcon from '../images/icons8-quill-pen-64.png'
+import profNone from '../images/rank-one.png' 
+import profHalf from '../images/rank-two.png' 
+import profFull from '../images/rank-three.png' 
+import profExpt from '../images/rank-four.png' 
 
 const PROFS = {
   NONE: 0,  // adds base skill mod only
@@ -9,191 +14,84 @@ const PROFS = {
   EXPT: 3,  // adds base skill mod + 2*profBonus
 };
 
-export default function SkillsPane() {
-  // these mods are probably not used to calculate anything else on the
-  // character sheet so we can probably get away with making them local
-  // NOTE: you will skill need to pass the ability scores in here to use!
-  const [acrobatics, setAcrobatics] = useState(PROFS.NONE);
-  const [animalHandling, setAnimalHandling] = useState(PROFS.NONE);
-  const [arcana, setArcana] = useState(PROFS.NONE);
-  const [athletics, setAthletics] = useState(PROFS.NONE);
-  const [deception, setDeception] = useState(PROFS.NONE);
-  const [history, setHistory] = useState(PROFS.NONE);
-  const [insight, setInsight] = useState(PROFS.NONE);
-  const [intimidation, setIntimidation] = useState(PROFS.NONE);
-  const [investigation, setInvestigation] = useState(PROFS.NONE);
-  const [medicine, setMedicine] = useState(PROFS.NONE);
-  const [nature, setNature] = useState(PROFS.NONE);
-  const [perception, setPerception] = useState(PROFS.NONE);
-  const [performance, setPerformance] = useState(PROFS.NONE);
-  const [persuasion, setPersuasion] = useState(PROFS.NONE);
-  const [religion, setReligion] = useState(PROFS.NONE);
-  const [sleightOfHand,setSleightOfHand] = useState(PROFS.NONE);
-  const [stealth, setStealth] = useState(PROFS.NONE);
-  const [survival, setSurvival] = useState(PROFS.NONE);
+const profList = [profNone, profHalf, profFull, profExpt]
 
-  // The base abilities for each skill are:
-  // Strength: athletics
-  // Dexterity: acrobatics, sleightOfHand, stealth
-  // Constitution: none.
-  // Intelligence: arcana, history, investigation, nature, religion
-  // Wisdom: animalHandling, insight, medicine, perception, survival
-  // Charisma: deception, intimidation, performance, persuasion
+export default function SkillsPane({str, dex, int, wis, cha}) {
+    const [acrobatics, setAcrobatics] = useState(PROFS.NONE);
+    const [animalHandling, setAnimalHandling] = useState(PROFS.NONE);
+    const [arcana, setArcana] = useState(PROFS.NONE);
+    const [athletics, setAthletics] = useState(PROFS.NONE);
+    const [deception, setDeception] = useState(PROFS.NONE);
+    const [history, setHistory] = useState(PROFS.NONE);
+    const [insight, setInsight] = useState(PROFS.NONE);
+    const [intimidation, setIntimidation] = useState(PROFS.NONE);
+    const [investigation, setInvestigation] = useState(PROFS.NONE);
+    const [medicine, setMedicine] = useState(PROFS.NONE);
+    const [nature, setNature] = useState(PROFS.NONE);
+    const [perception, setPerception] = useState(PROFS.NONE);
+    const [performance, setPerformance] = useState(PROFS.NONE);
+    const [persuasion, setPersuasion] = useState(PROFS.NONE);
+    const [religion, setReligion] = useState(PROFS.NONE);
+    const [sleightOfHand,setSleightOfHand] = useState(PROFS.NONE);
+    const [stealth, setStealth] = useState(PROFS.NONE);
+    const [survival, setSurvival] = useState(PROFS.NONE);
+    const [editing, setEditing] = useState(false);
 
 
-  // Recommended implementation:
-  // make an array of skill names, vals, updaters, and base skill modifiers
-  // make a single skill component
-    // you can use an img button and just swap out the source based on the
-    // current skills prof level using a ternary
-  // make the "header" part with the skillsTitle and edit editButton
-  // map over the skills list
+    function SkillsTopBar() { 
+        const toggleEditing = () => {setEditing(!editing)};
+        return <div class="SkillsTopBar">
+            <h2 class="skillsTitle">Skills</h2>
+            <img class="editButton" src={editIcon}
+                alt="Edit Abilities"
+                onClick={toggleEditing} />
+            </div>
+    }
 
-  return <div id="SkillsPane">
-   <h2 class="skillsTitle">Skills</h2>
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setAcrobatics(e.target.value);
-       }}
-   />
-   Acrobatics <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setAnimalHandling(e.target.value);
-       }}
-   />
-   Animal Handling <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setArcana(e.target.value);
-       }}
-   />
-   Arcana <br/>
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setAthletics(e.target.value);
-       }}
-   />
-   Athletics <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setDeception(e.target.value);
-       }}
-   />
-   Deception <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setHistory(e.target.value);
-       }}
-   />
-   History <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setInsight(e.target.value);
-       }}
-   />
-   Insight <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setIntimidation(e.target.value);
-       }}
-   />
-   Intimidation <br/>
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setInvestigation(e.target.value);
-       }}
-   />
-   Investigation <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setMedicine(e.target.value);
-       }}
-   />
-   Medicine <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setNature(e.target.value);
-       }}
-   />
-   Nature <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setPerception(e.target.value);
-       }}
-   />
-   Perception <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setPerformance(e.target.value);
-       }}
-   />
-   Performance <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setPersuasion(e.target.value);
-       }}
-   />
-   Persuasion <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setReligion(e.target.value);
-       }}
-   />
-   Religion <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setSleightOfHand(e.target.value);
-       }}
-   />
-   Sleight of Hand <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setStealth(e.target.value);
-       }}
-   />
-   Stealth <br />
-   <input
-       type="text"
-       class="skills"
-       onChange={(e) => {
-           setSurvival(e.target.value);
-       }}
-   />
-   Survival <br />
+    function SkillsList() {
+       return proficiency.map((proficient) => { 
+            return <>
+                    {editing ? 
+                    <img class='prof' src={profList[proficient.val]} 
+                        onClick={(e) => {
+                            proficient.updater((curr) => (curr + 1) % 4);
+                        }}
+                    />
+                    : <img class='prof' src={profList[proficient.val]} 
+                    />
+                    }
+                    {editing && <p class='skills-list'>{proficient.base}</p>}
+                    <>
+                    <p class='skills-list'>{proficient.name}</p>
+                    </>
+                    <br/>
+            </>}
+        );
+    }
+
+    const proficiency = [
+        {name: "Acrobattics", base: dex, val: acrobatics, updater: setAcrobatics},
+        {name: "Animal Handling", base: wis, val: animalHandling, updater: setAnimalHandling},
+        {name: "Arcana", base: int, val: arcana, updater: setArcana},
+        {name: "Deception", base: cha, val: deception, updater: setDeception},
+        {name: "History", base: int, val: history, updater: setHistory},
+        {name: "Insight", base: wis, val: insight, updater: setInsight},
+        {name: "Intimidation", base: cha, val: intimidation, updater: setIntimidation},
+        {name: "Investigation", base: int, val: investigation, updater: setInvestigation},
+        {name: "Medicine", base: wis, val: medicine, updater: setMedicine},
+        {name: "Nature", base: int, val: nature, updater: setNature},
+        {name: "Perception", base: wis, val: perception, updater: setPerception},
+        {name: "Performance", base: cha, val: performance, updater: setPerformance},
+        {name: "Persuasion", base: cha, val: persuasion, updater: setPersuasion},
+        {name: "Religion", base: int, val: religion, updater: setReligion},
+        {name: "Sleight of Hand", base: dex, val: sleightOfHand, updater: setSleightOfHand},
+        {name: "Stealth", base: dex, val: stealth, updater: setStealth},
+        {name: "Survival", base: wis, val: survival, updater: setSurvival},
+    ];
+
+    return <div id="SkillsPane">
+        <div id="SkillsTopBar"><SkillsTopBar /></div>
+        <SkillsList /> 
    </div>
+   
 }

@@ -48,6 +48,47 @@
   flex-direction: row-reverse;
 }
 
+#SkillsPane { 
+  flex-grow: 0.3;
+  flex-direction: column;
+  display: table;
+  margin-top: 30px;
+}
+
+#SkillsTopBar { 
+  display: flex;
+  flex-direction: row-reverse; 
+}
+
+.prof { 
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 5px;
+}
+
+.skills-list { 
+  display: inline-block;
+  font-size: 1.1rem;
+  margin-left: 5px;
+}
+
+.skillsTitle {
+  text-align: left;
+  margin-bottom: 20px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.skills {
+  width: 25px;
+  font-size: 15px;
+  text-align: center;
+  background-color: #d2c693;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
 .middle-column {
   flex-grow: 1;
   display: flex;
@@ -149,19 +190,6 @@
   text-align: center;
   background-color: #d2c693;
   margin-bottom: 20px;
-}
-
-.skillsTitle {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.skills {
-  width: 25px;
-  font-size: 15px;
-  text-align: center;
-  background-color: #d2c693;
-  margin-bottom: 10px;
-  margin-right: 5px;
 }
 
 .throwsTitle {
