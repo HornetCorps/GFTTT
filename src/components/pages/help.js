@@ -6,7 +6,7 @@ export default function Help() {
 
     <h1 className = "title"> Goblin Forge Table Top Tools Support</h1>    
     <input class = "w3-import" type="text" placeholder="How can we help?"></input>
-    <h1 className="questionsTitle">Commenly Asked Questions:</h1>
+    <h1 className="questionsTitle">Commonly Asked Questions:</h1>
     <p> • How can I change my character stats?</p>
     <br/>
     <p> • Where do I find my saved characters</p>
