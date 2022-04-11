@@ -60,6 +60,8 @@ export default function AbScorePane({str, dex, con, int, wis, cha}) {
           {editing ?
             <input
               type="number"
+              min='1'
+              max='20'
               class ="stats"
               value={score.val}
               onChange={(e) => { score.updater.apply(null, [e.target.value]); }}

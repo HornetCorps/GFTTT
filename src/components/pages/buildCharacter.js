@@ -2,21 +2,25 @@ import React, {useState} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
 import AbScorePane from './AbScorePane.js';
+import SkillsPane from './SkillsPane.js';
+import SavingThrowsPane from './SavingThrowsPane.js';
+import FlavorPane from './FlavorPane.js';
 import armLogo from '../images/img-18.png';
 import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
 
 export default function BuildCharacter() {
+    const profBonus = (() => (2+Math.floor((level-1)/4)));
 
     const [characterName, setCharacterName] = useState();
     const [charClass, setCharClass] = useState();
-    const [level, setLevel] = useState();
+    const [level, setLevel] = useState(1);
     const [race, setRace] = useState();
     const [background, setBackground] = useState();
     const [alignment, setAlignment] = useState();
     const [experience, setExperience] = useState();
     const [playerName, setPlayerName] = useState();
-    // AbScores were here
+
     const [strength, setStrength] = useState(10);
     const [dexterity, setDexterity] = useState(10);
     const [constitution, setConstitution] = useState(10);
@@ -24,41 +28,18 @@ export default function BuildCharacter() {
     const [wisdom, setWisdom] = useState(10);
     const [charisma, setCharisma] = useState(10);
 
+    // made skills local to SkillsPane
+
     const [armorClass, setArmorClass] = useState();
     const [initiative, setInitiative] = useState();
-    const [speed, setSpeed] = useState();
-    const [acrobatics, setAcrobatics] = useState();
-    const [animalHandling, setAnimalHandling] = useState();
-    const [arcana, setArcana] = useState();
-    const [athletics, setAthletics] = useState();
-    const [deception, setDeception] = useState();
-    const [history, setHistory] = useState();
-    const [insight, setInsight] = useState();
-    const [intimidation, setIntimidation] = useState();
-    const [investigation, setInvestigation] = useState();
-    const [medicine, setMedicine] = useState();
-    const [nature, setNature] = useState();
-    const [perception, setPerception] = useState();
-    const [performance, setPerformance] = useState();
-    const [persuasion, setPersuasion] = useState();
-    const [religion, setReligion] = useState();
-    const [sleightOfHand,setSleightOfHand] = useState();
-    const [stealth, setStealth] = useState();
-    const [survival, setSurvival] = useState();
-    const [maxHitPoints, setMaxHitPoints] = useState();
-    const [strThrow, setStrThrow] = useState();
-    const [dexThrow, setDexThrow] = useState();
-    const [conThrow, setConThrow] = useState();
-    const [intThrow, setIntThrow] = useState();
-    const [wisThrow, setWisThrow] = useState();
-    const [chaThrow, setChaThrow] = useState();
-    const [darkVision, setDarkVision] = useState();
-    const [equipment, setEquipment] = useState();
-    const [personalityTraits, setPersonalityTraits] = useState();
-    const [ideals, setIdeals] = useState();
-    const [bonds, setBonds] = useState();
-    const [flaws, setFlaws] = useState();
-    const [featsTraits, setFeatsTraits] = useState();
+    const [speed, setSpeed] = useState(30);
+    const [maxHitPoints, setMaxHitPoints] = useState(0);
+
+    const [darkVision, setDarkVision] = useState(0);
+    // made saving throws local to SavingThrowsPane
+    const [equipment, setEquipment] = useState({});
+    // made personalityTraits, ideals, bonds, flaws local to FlavorPane
+    const [featsTraits, setFeatsTraits] = useState({});
 
     async function onSubmit(e) { /*
         let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience,
@@ -208,153 +189,9 @@ export default function BuildCharacter() {
                             />
                             <br />
                         </div>
-                        <div id="box6">
-                            <h2 class="skillsTitle">Skills</h2>
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setAcrobatics(e.target.value);
-                                }}
-                            />
-                            Acrobatics <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setAnimalHandling(e.target.value);
-                                }}
-                            />
-                            Animal Handling <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setArcana(e.target.value);
-                                }}
-                            />
-                            Arcana <br/>
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setAthletics(e.target.value);
-                                }}
-                            />
-                            Athletics <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setDeception(e.target.value);
-                                }}
-                            />
-                            Deception <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setHistory(e.target.value);
-                                }}
-                            />
-                            History <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setInsight(e.target.value);
-                                }}
-                            />
-                            Insight <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setIntimidation(e.target.value);
-                                }}
-                            />
-                            Intimidation <br/>
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setInvestigation(e.target.value);
-                                }}
-                            />
-                            Investigation <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setMedicine(e.target.value);
-                                }}
-                            />
-                            Medicine <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setNature(e.target.value);
-                                }}
-                            />
-                            Nature <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setPerception(e.target.value);
-                                }}
-                            />
-                            Perception <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setPerformance(e.target.value);
-                                }}
-                            />
-                            Performance <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setPersuasion(e.target.value);
-                                }}
-                            />
-                            Persuasion <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setReligion(e.target.value);
-                                }}
-                            />
-                            Religion <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setSleightOfHand(e.target.value);
-                                }}
-                            />
-                            Sleight of Hand <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setStealth(e.target.value);
-                                }}
-                            />
-                            Stealth <br />
-                            <input
-                                type="text"
-                                class="skills"
-                                onChange={(e) => {
-                                    setSurvival(e.target.value);
-                                }}
-                            />
-                            Survival <br />
-                        </div>
+
+                        <SkillsPane />
+                        
                     </div>
                     <div id="box7">
                     <img class="statIcon" src={hitLogo} alt="MaxHitPoints" />
@@ -366,55 +203,6 @@ export default function BuildCharacter() {
                                 setMaxHitPoints(e.target.value);
                             }}
                         /> / 13
-                        <h2 class="throwsTitle">Saving Throws</h2>
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setStrThrow(e.target.value);
-                            }}
-                        />
-                        STR<br />
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setDexThrow(e.target.value);
-                            }}
-                        />
-                        DEX<br />
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setConThrow(e.target.value);
-                            }}
-                        />
-                        CON <br />
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setIntThrow(e.target.value);
-                            }}
-                        />
-                        INT<br />
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setWisThrow(e.target.value);
-                            }}
-                        />
-                        WIS<br />
-                        <input
-                            type="text"
-                            class="throws"
-                            onChange={(e) => {
-                                setChaThrow(e.target.value);
-                            }}
-                        />
-                        CHA<br /><br />
 
                         <img class="statIcon" src={visLogo} alt="Darkvision" />
                         <h2>Darkvision</h2>
@@ -425,6 +213,8 @@ export default function BuildCharacter() {
                                 setDarkVision(e.target.value);
                             }}
                         /> FT.
+
+                        <SavingThrowsPane />
 
                         <h2 class="equipmentTitle"> Equipment </h2>
                         <textarea
@@ -440,42 +230,9 @@ export default function BuildCharacter() {
 
                     </div>
                     <div id="box8">
-                        <h2>Personality Traits</h2>
-                        <textarea
-                            class="personalityTraits"
-                            cols="40"
-                            rows="4"
-                            onChange={(e) => {
-                                setPersonalityTraits(e.target.value);
-                            }}
-                        /> <br/ >
-                        <h2>Ideals</h2>
-                        <textarea
-                            class="ideals"
-                            cols="40"
-                            rows="4"
-                            onChange={(e) => {
-                                setIdeals(e.target.value);
-                            }}
-                        /> <br/ >
-                        <h2>Bonds</h2>
-                        <textarea
-                            class="bonds"
-                            cols="40"
-                            rows="4"
-                            onChange={(e) => {
-                                setBonds(e.target.value);
-                            }}
-                        /> <br/ >
-                        <h2>Flaws</h2>
-                        <textarea
-                            class="flaws"
-                            cols="40"
-                            rows="4"
-                            onChange={(e) => {
-                                setFlaws(e.target.value);
-                            }}
-                        /> <br/ >
+
+                        <FlavorPane />
+
                         <h2>Features & Traits</h2>
                         <textarea
                             class="featuresandtraits"
