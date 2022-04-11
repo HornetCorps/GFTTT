@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
 import AbScorePane from './AbScorePane.js';
 import SkillsPane from './SkillsPane.js';
 import SavingThrowsPane from './SavingThrowsPane.js';
 import FlavorPane from './FlavorPane.js';
+import EquipmentPane from './EquipmentPane.js';
 import armLogo from '../images/img-18.png';
 import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
@@ -12,14 +13,14 @@ import visLogo from '../images/img-20.png';
 export default function BuildCharacter() {
     const profBonus = (() => (2+Math.floor((level-1)/4)));
 
-    const [characterName, setCharacterName] = useState();
-    const [charClass, setCharClass] = useState();
+    const [characterName, setCharacterName] = useState('');
+    const [charClass, setCharClass] = useState('');
     const [level, setLevel] = useState(1);
-    const [race, setRace] = useState();
-    const [background, setBackground] = useState();
-    const [alignment, setAlignment] = useState();
-    const [experience, setExperience] = useState();
-    const [playerName, setPlayerName] = useState();
+    const [race, setRace] = useState('');
+    const [background, setBackground] = useState('');
+    const [alignment, setAlignment] = useState('');
+    const [experience, setExperience] = useState(0);
+    const [playerName, setPlayerName] = useState('');
 
     const [strength, setStrength] = useState(10);
     const [dexterity, setDexterity] = useState(10);
@@ -30,27 +31,41 @@ export default function BuildCharacter() {
 
     // made skills local to SkillsPane
 
-    const [armorClass, setArmorClass] = useState();
-    const [initiative, setInitiative] = useState();
+    const [armorClass, setArmorClass] = useState(10);
+    const [initiative, setInitiative] = useState(0);
     const [speed, setSpeed] = useState(30);
     const [maxHitPoints, setMaxHitPoints] = useState(0);
 
     const [darkVision, setDarkVision] = useState(0);
     // made saving throws local to SavingThrowsPane
-    const [equipment, setEquipment] = useState({});
+    const [equipment, setEquipment] = useState([]);
     // made personalityTraits, ideals, bonds, flaws local to FlavorPane
-    const [featsTraits, setFeatsTraits] = useState({});
+    const [featsTraits, setFeatsTraits] = useState([]);
 
-    async function onSubmit(e) { /*
-        let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience,
-                                    playerName, strength, dexterity, constitution, intelligence, wisdom, charisma,
-                                    armorClass, initiative, speed, acrobatics, animalHandling, arcana, athletics,
-                                    deception, history, insight, intimidation, investigation, medicine, nature,
-                                    perception, performance, persuasion, religion, sleightOfHand, stealth, survival,
-                                    maxHitPoints, strThrow, dexThrow, conThrow, intThrow, wisThrow, chaThrow, darkVision,
-                                    equipment, personalityTraits, ideals, bonds, flaws, featsTraits
+    const [fileDownloadUrl, setFileDownloadURL] = useState(null);
+    const dofileDownload = useRef(null);
+
+    async function onSubmit(e) {
+        let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience, playerName,
+                                    strength, dexterity, constitution, intelligence, wisdom, charisma,
+                                    armorClass, initiative, speed,
+                                  //  acrobatics, animalHandling, arcana, athletics,
+                                  //  deception, history, insight, intimidation, investigation, medicine, nature,
+                                  //  perception, performance, persuasion, religion, sleightOfHand, stealth, survival,
+                                    maxHitPoints, /*strThrow, dexThrow, conThrow, intThrow, wisThrow, chaThrow,*/ darkVision,
+                                    equipment, /*personalityTraits, ideals, bonds, flaws,*/ featsTraits
                                  };
-        e.preventDefault();
+
+        let output = JSON.stringify(buildCharacterSave,
+            null, 2);
+
+        // Download it
+        const blob = new Blob([output]);
+        setFileDownloadURL(URL.createObjectURL(blob));
+        dofileDownload.current.click();
+        URL.revokeObjectURL(fileDownloadUrl);  // free up storage--no longer needed.
+        setFileDownloadURL("");
+      /*  e.preventDefault();
         for (const key in buildCharacterSave) {
             if (buildCharacterSave[key] == null) {
                 window.alert("All fields required.");
@@ -77,6 +92,13 @@ export default function BuildCharacter() {
     }
 
     return <div className='buildCharacter'>
+
+    <a className="hidden"
+                        download={"character.json"}
+                        href={fileDownloadUrl}
+                        ref={dofileDownload}
+                        />
+
         <h1> Build A Character</h1>
         <body>
             <div class="box-wrapper">
@@ -191,7 +213,7 @@ export default function BuildCharacter() {
                         </div>
 
                         <SkillsPane />
-                        
+
                     </div>
                     <div id="box7">
                     <img class="statIcon" src={hitLogo} alt="MaxHitPoints" />
@@ -216,16 +238,10 @@ export default function BuildCharacter() {
 
                         <SavingThrowsPane />
 
-                        <h2 class="equipmentTitle"> Equipment </h2>
-                        <textarea
-                            class="equipment"
-                            cols="30"
-                            rows="10"
-                            onChange={(e) => {
-                                setEquipment(e.target.value);
-                            }}
-                        />
-
+                        <EquipmentPane
+                          equipment={equipment}
+                          setEquipment={setEquipment}
+                          />
 
 
                     </div>
