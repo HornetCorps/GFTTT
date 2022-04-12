@@ -246,10 +246,7 @@ export default function BuildCharacter() {
 
                         <SavingThrowsPane />
 
-                        <EquipmentPane
-                          equipment={equipment}
-                          setEquipment={setEquipment}
-                          />
+                        {EquipmentPane({equipment, setEquipment})}
 
 
                     </div>
