@@ -269,7 +269,7 @@ export default function BuildCharacter() {
 
                     </div>
                     <div id="box8">
-
+                        
                         <FlavorPane />
 
                         <h2>Features & Traits</h2>
