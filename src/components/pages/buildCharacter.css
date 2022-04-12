@@ -220,6 +220,15 @@
   font-size: 20px;
 }
 
+.flavors {
+  background-color: #d2c693;
+  color: black;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  height: 100px;
+}
+
 .personalityTraits {
   background-color: #d2c693;
   color: black;
