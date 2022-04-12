@@ -44,6 +44,7 @@ export default function BuildCharacter() {
 
     const [fileDownloadUrl, setFileDownloadURL] = useState(null);
     const dofileDownload = useRef(null);
+    const modOf = ((x) => Math.floor((x-10)/2));
 
     async function onSubmit(e) {
         let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience, playerName,
@@ -212,7 +213,14 @@ export default function BuildCharacter() {
                             <br />
                         </div>
 
-                        <SkillsPane />
+                        <SkillsPane
+                          str={modOf(strength)}
+                          dex={modOf(dexterity)}
+                          int={modOf(intelligence)}
+                          wis={modOf(wisdom)}
+                          cha={modOf(charisma)}
+                          getProfBonus={profBonus}
+                        />
 
                     </div>
                     <div id="box7">
