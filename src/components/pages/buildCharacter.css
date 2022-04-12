@@ -67,6 +67,14 @@
   margin-right: 5px;
 }
 
+.prof-bonus { 
+  display: inline-block;
+  text-align: right;
+  width: 25px; 
+  font-weight: bold;
+  font-size: large;
+}
+
 .skills-list { 
   display: inline-block;
   font-size: 1.1rem;
