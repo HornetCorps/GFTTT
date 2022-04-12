@@ -130,6 +130,7 @@
   margin-left: 15px;
   text-align: center;
 }
+
 #box8 {
   flex-grow: 0.2;
   text-align: center;
@@ -140,6 +141,11 @@
   flex-direction: row;
   margin-top: 20px;
   align-self: center;
+}
+
+#SavingThrowsTopBar {
+  display: flex;
+  justify-content: center;
 }
 
 .characterName {
@@ -228,6 +234,15 @@
   font-size: 20px;
 }
 
+.flavors {
+  background-color: #d2c693;
+  color: black;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  height: 100px;
+}
+
 .personalityTraits {
   background-color: #d2c693;
   color: black;
@@ -298,4 +313,23 @@
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+.equipmentInput {
+  background-color: #d2c693;
+}
+
+.redX {
+  margin-left: 10px;
+  height: 15px;
+  width: 15px;
+}
+
+.del {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 45%;
+
+
 }

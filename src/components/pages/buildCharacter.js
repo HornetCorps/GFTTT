@@ -57,6 +57,13 @@ export default function BuildCharacter() {
 
     const [darkVision, setDarkVision] = useState(0);
     // made saving throws local to SavingThrowsPane
+    const [strThrow, setStrThrow] = useState(false);
+    const [dexThrow, setDexThrow] = useState(false);
+    const [conThrow, setConThrow] = useState(false);
+    const [intThrow, setIntThrow] = useState(false);
+    const [wisThrow, setWisThrow] = useState(false);
+    const [chaThrow, setChaThrow] = useState(false);
+  
     const [equipment, setEquipment] = useState([]);
 
     const [personalityTraits, setPersonalityTraits] = useState('');
@@ -283,17 +290,22 @@ export default function BuildCharacter() {
                             }}
                         /> FT.
 
-                        <SavingThrowsPane />
-
-                        <EquipmentPane
-                          equipment={equipment}
-                          setEquipment={setEquipment}
+                        <SavingThrowsPane
+                          str={[modOf(strength), strThrow, setStrThrow]}
+                          dex={[modOf(dexterity),dexThrow, setDexThrow]}
+                          con={[modOf(constitution),conThrow, setConThrow]}
+                          int={[modOf(intelligence),intThrow, setIntThrow]}
+                          wis={[modOf(wisdom),wisThrow, setWisThrow]}
+                          cha={[modOf(charisma),chaThrow, setChaThrow]}
+                          getProfBonus={profBonus}
                           />
+
+                        {EquipmentPane({equipment, setEquipment})}
 
 
                     </div>
                     <div id="box8">
-
+                        
                         <FlavorPane />
 
                         <h2>Features & Traits</h2>
