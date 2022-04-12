@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
 import editIcon from '../images/icons8-quill-pen-64.png'
-import profNone from '../images/rank-one.png' 
-import profHalf from '../images/rank-two.png' 
-import profFull from '../images/rank-three.png' 
-import profExpt from '../images/rank-four.png' 
+import profNone from '../images/rank-one.png'
+import profHalf from '../images/rank-two.png'
+import profFull from '../images/rank-three.png'
+import profExpt from '../images/rank-four.png'
 
 const PROFS = {
   NONE: 0,  // adds base skill mod only
@@ -16,7 +16,7 @@ const PROFS = {
 
 const profList = [profNone, profHalf, profFull, profExpt]
 
-export default function SkillsPane({str, dex, int, wis, cha, getProfBonus, acro, anim, arca, athl, dece, hist, 
+export default function SkillsPane({str, dex, int, wis, cha, getProfBonus, acro, anim, arca, athl, dece, hist,
                                     insi, inti, inve, medi, natu, perc, perf, pers, reli, slei, stea, surv}) {
     const [editing, setEditing] = useState(false);
 
@@ -38,10 +38,10 @@ export default function SkillsPane({str, dex, int, wis, cha, getProfBonus, acro,
         {name: "Religion", base: int, val: reli[0], updater: reli[1]},
         {name: "Sleight of Hand", base: dex, val: slei[0], updater: slei[1]},
         {name: "Stealth", base: dex, val: stea[0], updater: stea[1]},
-        {name: "Survival", base: wis, val: surv[0], updater: serv[1]},
+        {name: "Survival", base: wis, val: surv[0], updater: surv[1]},
     ];
 
-    function SkillsTopBar() { 
+    function SkillsTopBar() {
         const toggleEditing = () => {setEditing(!editing)};
         return <div class="SkillsTopBar">
             <h2 class="skillsTitle">Skills</h2>
@@ -51,36 +51,36 @@ export default function SkillsPane({str, dex, int, wis, cha, getProfBonus, acro,
             </div>
     }
 
-    function positiveNum(num) { 
+    function positiveNum(num) {
         if (num > 0) {
-            return "+" + num; 
-        } else { 
-            return num; 
+            return "+" + num;
+        } else {
+            return num;
         }
     }
 
-    function calculateSkillMod(profLevel, baseMod) { 
-            if (profLevel == PROFS.NONE) { 
+    function calculateSkillMod(profLevel, baseMod) {
+            if (profLevel == PROFS.NONE) {
                 return positiveNum(baseMod)
             } else if (profLevel == PROFS.HALF) {
                 return positiveNum(baseMod + Math.floor(getProfBonus()/2));
-            } else if (profLevel == PROFS.FULL) { 
+            } else if (profLevel == PROFS.FULL) {
                 return positiveNum(baseMod + getProfBonus())
-            } else if (profLevel == PROFS.EXPT) { 
+            } else if (profLevel == PROFS.EXPT) {
                 return positiveNum(baseMod + 2 * getProfBonus())
             }
-    } 
+    }
 
     function SkillsList() {
-       return proficiency.map((proficient) => { 
+       return proficiency.map((proficient) => {
             return <>
-                    {editing ? 
-                    <img class='prof' src={profList[proficient.val]} 
+                    {editing ?
+                    <img class='prof' src={profList[proficient.val]}
                         onClick={(e) => {
                             proficient.updater((curr) => (curr + 1) % 4);
                         }}
                     />
-                    : <img class='prof' src={profList[proficient.val]} 
+                    : <img class='prof' src={profList[proficient.val]}
                     />
                     }
                     {!editing && <div class='prof-bonus'>{calculateSkillMod(proficient.val, proficient.base)}</div>}
@@ -94,7 +94,7 @@ export default function SkillsPane({str, dex, int, wis, cha, getProfBonus, acro,
 
     return <div id="SkillsPane">
         <div id="SkillsTopBar"><SkillsTopBar /></div>
-        <SkillsList /> 
+        <SkillsList />
    </div>
-   
+
 }

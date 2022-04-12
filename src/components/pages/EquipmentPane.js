@@ -3,6 +3,28 @@ import '../../App.css';
 import './buildCharacter.css';
 import editIcon from '../images/icons8-quill-pen-64.png'
 import redX from '../images/redX.png'
+
+function TextInputHandler({itemAdder}) {
+    const [textString, setTextString] = useState("");
+    const onChange = e => {
+      setTextString(e.target.value);
+    };
+    const onSubmit = (e) => {
+      itemAdder(textString);
+      setTextString("");
+    }
+    return <>
+      <input
+        class='equipmentInput'
+        type='text'
+        value={textString}
+        onChange={onChange}
+        onSubmit={onSubmit}
+      />
+      <button type="submit" onClick={onSubmit} >add</button>
+    </>
+}
+
 export default function EquipmentPane({equipment, setEquipment}) {
   // you have the equipment variable which contains the current state of the
   // equipment list (it's an array so you can index and map over it) and
@@ -12,18 +34,9 @@ export default function EquipmentPane({equipment, setEquipment}) {
   // filter to remove items
   const [editing, setEditing] = useState(false);
 
-  const [textString, setTextString] = useState("");
-
-  function handleSubmit(e) {
-    let item = textString;
-    setTextString("");
+  function handleSubmit(item) {
     setEquipment( equip => [...equip, item])
   }
-
-  function onInput(e) {
-    setTextString(e.target.value)
-  }
-
   function EquipmentTopBar() {
     const toggleEditing = () => {setEditing(!editing)};
     return <div id="EquipmentTopBar">
@@ -38,13 +51,14 @@ export default function EquipmentPane({equipment, setEquipment}) {
         <h2>Equipment</h2>
 
         {editing ? <>
-            <input class="equipmentInput"  type='text' value={textString} onChange={(e)=>{setTextString(e.target.value)}}/>
-            <button type = "submit" onClick={handleSubmit} >add</button>
+            <TextInputHandler
+              itemAdder={handleSubmit}
+             />
             <br/>
             <br/>
-            {equipment.map(equip => 
+            {equipment.map(equip =>
               <div class = "del">
-              <h2>{equip}</h2>  
+              <h2>{equip}</h2>
               <img class="redX" src={redX} alt="delete" />
               </div>
             )}
@@ -55,8 +69,8 @@ export default function EquipmentPane({equipment, setEquipment}) {
           )}
           </>
         }
-        
-        
+
+
 
     </div>
   }
