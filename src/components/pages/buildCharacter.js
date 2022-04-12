@@ -6,6 +6,7 @@ import SkillsPane from './SkillsPane.js';
 import SavingThrowsPane from './SavingThrowsPane.js';
 import FlavorPane from './FlavorPane.js';
 import EquipmentPane from './EquipmentPane.js';
+import ExportButton from '../ExportButton.js';
 import armLogo from '../images/img-18.png';
 import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
@@ -30,6 +31,24 @@ export default function BuildCharacter() {
     const [charisma, setCharisma] = useState(10);
 
     // made skills local to SkillsPane
+    const [acrobatics, setAcrobatics] = useState(0);
+    const [animalHandling, setAnimalHandling] = useState(0);
+    const [arcana, setArcana] = useState(0);
+    const [athletics, setAthletics] = useState(0);
+    const [deception, setDeception] = useState(0);
+    const [history, setHistory] = useState(0);
+    const [insight, setInsight] = useState(0);
+    const [intimidation, setIntimidation] = useState(0);
+    const [investigation, setInvestigation] = useState(0);
+    const [medicine, setMedicine] = useState(0);
+    const [nature, setNature] = useState(0);
+    const [perception, setPerception] = useState(0);
+    const [performance, setPerformance] = useState(0);
+    const [persuasion, setPersuasion] = useState(0);
+    const [religion, setReligion] = useState(0);
+    const [sleightOfHand, setSleightOfHand] = useState(0);
+    const [stealth, setStealth] = useState(0);
+    const [survival, setSurvival] = useState(0);
 
     const [armorClass, setArmorClass] = useState(10);
     const [initiative, setInitiative] = useState(0);
@@ -39,14 +58,21 @@ export default function BuildCharacter() {
     const [darkVision, setDarkVision] = useState(0);
     // made saving throws local to SavingThrowsPane
     const [equipment, setEquipment] = useState([]);
-    // made personalityTraits, ideals, bonds, flaws local to FlavorPane
+
+    const [personalityTraits, setPersonalityTraits] = useState('');
+    const [ideals, setIdeals] = useState('');
+    const [bonds, setBonds] = useState('');
+    const [flaws, setFlaws] = useState('');
+
     const [featsTraits, setFeatsTraits] = useState([]);
 
     const [fileDownloadUrl, setFileDownloadURL] = useState(null);
-    const dofileDownload = useRef(null);
+    const doFileDownload = useRef();
+
     const modOf = ((x) => Math.floor((x-10)/2));
 
     async function onSubmit(e) {
+        e.preventDefault();
         let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience, playerName,
                                     strength, dexterity, constitution, intelligence, wisdom, charisma,
                                     armorClass, initiative, speed,
@@ -63,7 +89,7 @@ export default function BuildCharacter() {
         // Download it
         const blob = new Blob([output]);
         setFileDownloadURL(URL.createObjectURL(blob));
-        dofileDownload.current.click();
+        doFileDownload.click();
         URL.revokeObjectURL(fileDownloadUrl);  // free up storage--no longer needed.
         setFileDownloadURL("");
       /*  e.preventDefault();
@@ -94,11 +120,6 @@ export default function BuildCharacter() {
 
     return <div className='buildCharacter'>
 
-    <a className="hidden"
-                        download={"character.json"}
-                        href={fileDownloadUrl}
-                        ref={dofileDownload}
-                        />
 
         <h1> Build A Character</h1>
         <body>
@@ -220,6 +241,24 @@ export default function BuildCharacter() {
                           wis={modOf(wisdom)}
                           cha={modOf(charisma)}
                           getProfBonus={profBonus}
+                          acro={[acrobatics, setAcrobatics]}
+                          anim={[animalHandling, setAnimalHandling]}
+                          arca={[arcana, setArcana]}
+                          athl={[athletics, setAthletics]}
+                          dece={[deception, setDeception]}
+                          hist={[history, setHistory]}
+                          insi={[insight, setInsight]}
+                          inti={[intimidation, setIntimidation]}
+                          inve={[investigation, setInvestigation]}
+                          medi={[medicine, setMedicine]}
+                          natu={[nature, setNature]}
+                          perc={[perception, setPerception]}
+                          perf={[performance, setPerformance]}
+                          pers={[persuasion, setPersuasion]}
+                          reli={[religion, setReligion]}
+                          slei={[sleightOfHand, setSleightOfHand]}
+                          stea={[stealth, setStealth]}
+                          surv={[survival, setSurvival]}
                         />
 
                     </div>
@@ -233,7 +272,7 @@ export default function BuildCharacter() {
                                 setMaxHitPoints(e.target.value);
                             }}
                         /> / 13
-
+                        <br />
                         <img class="statIcon" src={visLogo} alt="Darkvision" />
                         <h2>Darkvision</h2>
                         <input
@@ -270,7 +309,22 @@ export default function BuildCharacter() {
                 </div>
                 <div id="box9">
                     <button class="saveButton" onClick={onSubmit}>Save Character</button>
+                    <a className="hidden"
+                                        download={"character.json"}
+                                        href={fileDownloadUrl}
+                                        ref={doFileDownload}
+                                        />
                     <button class="cancelButton">Cancel</button>
+                    <ExportButton
+                                  data={[characterName, charClass, level, race, background, alignment, experience, playerName,
+                                    strength, dexterity, constitution, intelligence, wisdom, charisma,
+                                    armorClass, initiative, speed,
+                                  //  acrobatics, animalHandling, arcana, athletics,
+                                  //  deception, history, insight, intimidation, investigation, medicine, nature,
+                                  //  perception, performance, persuasion, religion, sleightOfHand, stealth, survival,
+                                    maxHitPoints, /*strThrow, dexThrow, conThrow, intThrow, wisThrow, chaThrow,*/ darkVision,
+                                    equipment, /*personalityTraits, ideals, bonds, flaws,*/ featsTraits
+                                 ]} />
                 </div>
             </div>
         </body>
