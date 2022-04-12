@@ -1,52 +1,59 @@
 import React, {useState} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
+import editIcon from '../images/icons8-quill-pen-64.png'
 
-export default function FlavorPane() {
-  const [personalityTraits, setPersonalityTraits] = useState('');
-  const [ideals, setIdeals] = useState('');
-  const [bonds, setBonds] = useState('');
-  const [flaws, setFlaws] = useState('');
+export default function FlavorPane({p, i, b, f}) {
+  const [personalityTraits, setPersonalityTraits] = useState("");
+  //const [ideals, setIdeals] = i;
+  //const [bonds, setBonds] = b;
+  //const [flaws, setFlaws] = f;
 
-  // Suggested implementation
-  // add the edit button and swap between textarea's and formatted display text
-  // you could make use of a map here if you want as well
-  return <>
-  <h2>Personality Traits</h2>
-  <textarea
-      class="personalityTraits"
-      cols="40"
-      rows="4"
-      onChange={(e) => {
-          setPersonalityTraits(e.target.value);
-      }}
-  /> <br/ >
-  <h2>Ideals</h2>
-  <textarea
-      class="ideals"
-      cols="40"
-      rows="4"
-      onChange={(e) => {
-          setIdeals(e.target.value);
-      }}
-  /> <br/ >
-  <h2>Bonds</h2>
-  <textarea
-      class="bonds"
-      cols="40"
-      rows="4"
-      onChange={(e) => {
-          setBonds(e.target.value);
-      }}
-  /> <br/ >
-  <h2>Flaws</h2>
-  <textarea
-      class="flaws"
-      cols="40"
-      rows="4"
-      onChange={(e) => {
-          setFlaws(e.target.value);
-      }}
-  /> <br/ >
-  </>
+  const [editing, setEditing] = useState(false);
+
+  const flavors = [
+      {name:"Personality Traits", val: personalityTraits, updater:setPersonalityTraits},
+      {name:"Ideals", val:i, updater:i},
+      {name:"Bonds", val:b, updater:b},
+      {name:"Flaws", val:f, updater:f}
+  ];
+
+  function FlavorTopBar(){
+        const toggleEditing = () => {setEditing(!editing)};
+        return <div class="FlavorTopBar">
+            <img class="editButton" src={editIcon}
+                alt="Edit Abilities"
+                onClick={toggleEditing} />
+        </div>
+  }
+
+  function Flavor(){
+        return<>
+            {flavors.map(
+                (flavor) => (
+                    <>
+                    <h3>{flavor.name}</h3>
+                    {editing ?
+                        <>
+                        <input
+                            class="flavors"
+                            type="text"
+                            value={flavor.val}
+                            onChange={(e) => {flavor.updater.apply(null, [e.target.value]); }}
+                        />
+                        </>
+                        :
+                        <div class="flavors">{flavor.val}</div>
+                    }
+                    </>
+                )
+            )}
+        </>;
+  }
+
+  return <div id="FlavorPane">
+      <FlavorTopBar />
+      <Flavor />
+  </div>
+
 }

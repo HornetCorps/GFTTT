@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import './buildCharacter.css';
 import strLogo from '../images/img-12.png';
@@ -11,27 +11,27 @@ import editIcon from '../images/icons8-quill-pen-64.png'
 import randIcon from '../images/randomScoresIcon.svg'
 
 const rollScore = (() => {
-  const d6 = (() => (1+Math.floor(Math.random()*6)));
+  const d6 = (() => (1 + Math.floor(Math.random() * 6)));
   let rolls = [d6(), d6(), d6(), d6()];
-  return rolls.sort().slice(1).reduce((sum, x) => sum+x, 0);
+  return rolls.sort().slice(1).reduce((sum, x) => sum + x, 0);
 });
 
-const modOf = ((x) => Math.floor((x-10)/2));
+const modOf = ((x) => Math.floor((x - 10) / 2));
 
-export default function AbScorePane({str, dex, con, int, wis, cha}) {
+export default function AbScorePane({ str, dex, con, int, wis, cha }) {
 
   const [editing, setEditing] = useState(false);
   const scores = [
-    {name: "Strength", logo: strLogo, val: str[0], updater: str[1]},
-    {name: "Dexterity", logo: dexLogo, val: dex[0], updater: dex[1]},
-    {name: "Constitution", logo: conLogo, val: con[0], updater: con[1]},
-    {name: "Intelligence", logo: intLogo, val: int[0], updater: int[1]},
-    {name: "Wisdom", logo: wisLogo, val: wis[0], updater: wis[1]},
-    {name: "Charisma", logo: chaLogo, val: cha[0], updater: cha[1]}
+    { name: "Strength", logo: strLogo, val: str[0], updater: str[1] },
+    { name: "Dexterity", logo: dexLogo, val: dex[0], updater: dex[1] },
+    { name: "Constitution", logo: conLogo, val: con[0], updater: con[1] },
+    { name: "Intelligence", logo: intLogo, val: int[0], updater: int[1] },
+    { name: "Wisdom", logo: wisLogo, val: wis[0], updater: wis[1] },
+    { name: "Charisma", logo: chaLogo, val: cha[0], updater: cha[1] }
   ];
 
   function AbScoreTopBar() {
-    const toggleEditing = () => {setEditing(!editing)};
+    const toggleEditing = () => { setEditing(!editing) };
 
     const rollRandomScores = () => (
       scores.map(
@@ -54,22 +54,22 @@ export default function AbScorePane({str, dex, con, int, wis, cha}) {
       {scores.map(
         (score) => (
           <>
-          <br />
-          <img class="statIcon" src={score.logo} alt={score.name} />
-          <br />
-          {editing ?
-            <input
-              type="number"
-              min='1'
-              max='20'
-              class ="stats"
-              value={score.val}
-              onChange={(e) => { score.updater.apply(null, [e.target.value]); }}
-            />
-            :
-            <h2>{score.val} ({modOf(score.val)>0 && '+'}{modOf(score.val)})</h2>
-          }
-          <h3>{score.name}</h3>
+            <br />
+            <img class="statIcon" src={score.logo} alt={score.name} />
+            <br />
+            {editing ?
+              <input
+                type="number"
+                min='1'
+                max='20'
+                class="stats"
+                value={score.val}
+                onChange={(e) => { score.updater.apply(null, [e.target.value]); }}
+              />
+              :
+              <h2>{score.val} ({modOf(score.val) > 0 && '+'}{modOf(score.val)})</h2>
+            }
+            <h3>{score.name}</h3>
           </>
         )
       )}
@@ -77,7 +77,7 @@ export default function AbScorePane({str, dex, con, int, wis, cha}) {
   }
 
   return <div id="AbScorePane">
-          <AbScoreTopBar />
-          <AbScores />
-        </div>
+    <AbScoreTopBar />
+    <AbScores />
+  </div>
 }
