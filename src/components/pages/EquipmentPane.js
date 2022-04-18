@@ -3,6 +3,7 @@ import '../../App.css';
 import './buildCharacter.css';
 import editIcon from '../images/icons8-quill-pen-64.png'
 import redX from '../images/redX.png'
+import { toBeInTheDocument } from '@testing-library/jest-dom/dist/matchers';
 
 function TextInputHandler({itemAdder}) {
     const [textString, setTextString] = useState("");
@@ -35,8 +36,15 @@ export default function EquipmentPane({equipment, setEquipment}) {
   const [editing, setEditing] = useState(false);
 
   function handleSubmit(item) {
+    const count = 0;
     setEquipment( equip => [...equip, item])
   }
+
+  function deleteItem(equip) {
+    setEquipment((equipList) => equipList.filter((x) => x !== equip))
+  }
+
+
   function EquipmentTopBar() {
     const toggleEditing = () => {setEditing(!editing)};
     return <div id="EquipmentTopBar">
@@ -58,14 +66,14 @@ export default function EquipmentPane({equipment, setEquipment}) {
             <br/>
             {equipment.map(equip =>
               <div class = "del">
-              <h2>{equip}</h2>
-              <img class="redX" src={redX} alt="delete" />
+              <h3>{equip}</h3  >
+              <img class="redX" onClick={() => deleteItem(equip)} src={redX} alt="delete" />
               </div>
             )}
             </>
           : <>
           {equipment.map(equip =>
-            <h2>{equip}</h2>
+            <h3>{equip}</h3>
           )}
           </>
         }
