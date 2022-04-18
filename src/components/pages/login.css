@@ -5,6 +5,16 @@
   font-size: 50px;
 }
 
+.login > h2 {
+  color: #ffffff;
+  margin-top: 125px;
+}
+
+.login > text {
+  color: #ffffff;
+}
+
+
 .login > label {
   color: #eda800;
   font-size: 25px;
@@ -33,3 +43,18 @@
   font-size: 17px;
   text-align: center;
 }
+
+.login > button2 {
+  width: 150px;
+  height: 4vh;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #eda800;
+  font-size: 17px;
+  text-align: center;
+}
+
