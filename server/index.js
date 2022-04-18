@@ -38,6 +38,38 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+app.post('/api/saveCharacter', cors(), (req, res)=>{
+  const newCharacter = newCharacterModel()
+  newCharacter.playerName = req.body.playerName
+  newCharacter.characterName = req.body.characterName
+  characterModel.find({playerName: req.body.playerName}, function(err, data){
+    if(data){
+      res.send("Character already exists.");
+    }
+    else{
+      newCharacter.save(function(err,data) {
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.send("character created.");
+        }
+      });
+    }
+  })
+})
+
+app.get('/api/getCharacter', cors(), (req,res)=>{
+  characterModel.find({playerName: req.body.playerName}, function(err, data){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.json(data);
+    }
+  })
+})
+
 app.get('/api/compendium/retrive-all', cors(), (req, res)=>{
   //API to READ all characters from DB.
   characterModel.find(function(err, data) {
