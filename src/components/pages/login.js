@@ -2,53 +2,46 @@ import '../../App.css';
 import './login.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
+import {auth} from "../../firebase-config";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
 export default function Login() {
     const navigate = useNavigate();
 
-    const [username, setUsernameReg] = useState();
-    const [password, setPasswordReg] = useState();
+    const [user, setUser] = useState({});
+
+    onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+
+    const [loginEmail, setLoginEmail ] = useState("")
+    //const [username, setUsernameReg] = useState();
+    const [loginPassword, setLoginPassword] = useState("");
     
     async function onSubmit(e) {
-        let userLogin = {username,password};
-        e.preventDefault();
-        
-        if(username == null || password == null){
-            window.alert("All fields required.");
-            return;
+        try {
+            const user = await signInWithEmailAndPassword(
+                auth,
+                loginEmail,
+                loginPassword
+            );
+        } catch (error) {
+            console.log(error.message);
         }
-        
-        await fetch("http://localhost:5000/api/login", {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userLogin),
-        })
-        .then(res => {
-            if(res.status === 404){
-                window.alert("Invalid user or password");
-                navigate("/login");
-            }
-            if(res.status === 200){
-                window.alert('Successful login, Welcome ' + username + "!");
-                navigate("/profile");
-            }
-        })
-        .catch(error => {
-            window.alert(error);
-            return;
-        });
+    };
+
+    const logout = async() => {
+        await signOut(auth);
     }
+
     return <div className='login'>
         <h1>Login</h1>
-        <label>Username</label>
+        <label>Email</label>
         <input 
             type="text" 
-            placeholder="Username"
+            placeholder="Email"
             onChange={(e) => {
-                setUsernameReg(e.target.value);
+                setLoginEmail(e.target.value);
             }}
         />
         <label>Password</label>
@@ -56,9 +49,15 @@ export default function Login() {
             type="password" 
             placeholder="password"
             onChange={(e) => {
-                setPasswordReg(e.target.value);
+                setLoginPassword(e.target.value);
             }}
         />
         <button onClick={onSubmit}>Login</button>
+
+        <button2 onClick={logout}> Sign Out</button2>
+
+        <h2> User Logged In: </h2>
+        <text>{user?.email}</text>
+        <text>{user?.uid}</text>
     </div>
 }
