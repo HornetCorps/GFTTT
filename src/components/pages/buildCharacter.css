@@ -240,7 +240,28 @@
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 15px;
+  margin-right: 10px;
+  padding: 10px;
   height: 100px;
+}
+
+.flavorsButton{
+  background-color: #d2c693;
+  color: black;
+  font-size: 15px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.flavorsButton:hover{
+  background-color: #c2b786;
+  cursor: pointer;
+}
+
+.flavors-form{
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .personalityTraits {
