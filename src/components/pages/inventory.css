@@ -1,9 +1,54 @@
-.inventory > h1 {
+h1 {
   color: #eda800;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-left: 10%;
 }
 
-.my-character { 
-  margin-top: 20px;
+.inventory { 
+  display: block;
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.character-gallery { 
+  padding: 0;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.character { 
+  border: black solid 4px;
+  background-color: gray;
+  border-radius: 5px; 
+  display: inline-block;
+  margin: 20px;
+  margin-left: 0;
+  width: 20rem;
+  padding: 20px; 
+}
+
+.character-name { 
+  display: block;
+  color: #eda800;
+  font-size: 1.5rem;
+  margin: auto; 
+}
+
+hr { 
+  margin-bottom: 10px;
+  background-color: black; 
+  height: 2px; 
+  border: none;
+
+}
+
+.build-button { 
+  margin-left: 10%;
+  margin-top: 2rem;
+}
+
+.button { 
+  margin-top: 18px;
+  text-align: center;
 }
