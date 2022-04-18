@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import '../../App.css';
 import './buildCharacter.css';
 import AbScorePane from './AbScorePane.js';
@@ -63,7 +63,7 @@ export default function BuildCharacter() {
     const [intThrow, setIntThrow] = useState(false);
     const [wisThrow, setWisThrow] = useState(false);
     const [chaThrow, setChaThrow] = useState(false);
-  
+
     const [equipment, setEquipment] = useState([]);
 
     const [personalityTraits, setPersonalityTraits] = useState('');
@@ -73,32 +73,41 @@ export default function BuildCharacter() {
 
     const [featsTraits, setFeatsTraits] = useState([]);
 
-    const [fileDownloadUrl, setFileDownloadURL] = useState(null);
-    const doFileDownload = useRef();
-
     const modOf = ((x) => Math.floor((x-10)/2));
 
+    function getCharacterStruct() {
+      return {
+            name: characterName, class: charClass, level: level, race: race,
+            background: background, alignment: alignment, experience: experience,
+            player: playerName,
+            abilities: {
+              strength: strength, dexterity: dexterity, constitution: constitution,
+              intelligence: intelligence, wisdom: wisdom, charisma: charisma
+            },
+            skillProfs: {
+              acrobatics: acrobatics, animalHandling: animalHandling,
+              arcana: arcana, athletics: athletics, deception: deception,
+              history: history, insight: insight, intimidation: intimidation,
+              investigation: investigation, medicine: medicine, nature: nature,
+              perception: perception, performance: performance, persuasion: persuasion,
+              religion: religion, sleightOfHand: sleightOfHand, stealth: stealth,
+              survival: survival
+            },
+            ac: armorClass, initiative: initiative, speed: speed,
+            maxHitPoints: maxHitPoints, darkVision: darkVision,
+            throwProfs: {
+              strength: strThrow, dexterity: dexThrow, constitution: conThrow,
+              intelligence: intThrow, wisdom: wisThrow, charisma: chaThrow
+            },
+            equipment: equipment,
+            flavor: {
+              personalityTraits: personalityTraits, ideals: ideals,
+              bonds: bonds, flaws: flaws
+            },
+            feats: featsTraits
+      };
+    }
     async function onSubmit(e) {
-        e.preventDefault();
-        let buildCharacterSave = { characterName, charClass, level, race, background, alignment, experience, playerName,
-                                    strength, dexterity, constitution, intelligence, wisdom, charisma,
-                                    armorClass, initiative, speed,
-                                  //  acrobatics, animalHandling, arcana, athletics,
-                                  //  deception, history, insight, intimidation, investigation, medicine, nature,
-                                  //  perception, performance, persuasion, religion, sleightOfHand, stealth, survival,
-                                    maxHitPoints, /*strThrow, dexThrow, conThrow, intThrow, wisThrow, chaThrow,*/ darkVision,
-                                    equipment, /*personalityTraits, ideals, bonds, flaws,*/ featsTraits
-                                 };
-
-        let output = JSON.stringify(buildCharacterSave,
-            null, 2);
-
-        // Download it
-        const blob = new Blob([output]);
-        setFileDownloadURL(URL.createObjectURL(blob));
-        doFileDownload.click();
-        URL.revokeObjectURL(fileDownloadUrl);  // free up storage--no longer needed.
-        setFileDownloadURL("");
       /*  e.preventDefault();
         for (const key in buildCharacterSave) {
             if (buildCharacterSave[key] == null) {
@@ -126,8 +135,6 @@ export default function BuildCharacter() {
     }
 
     return <div className='buildCharacter'>
-
-
         <h1> Build A Character</h1>
         <body>
             <div class="box-wrapper">
@@ -136,9 +143,7 @@ export default function BuildCharacter() {
                     <input
                         type="text"
                         class="characterName"
-                        onChange={(e) => {
-                            setCharacterName(e.target.value);
-                        }}
+                        onChange={(e) => setCharacterName(e.target.value)}
                     />
                 </div>
                 <div id="box2">
@@ -148,7 +153,7 @@ export default function BuildCharacter() {
                         type ="text"
                         class="characterInfo"
                         onChange={(e) => {
-                            setCharClass(e.target.value);
+                            setCharClass((_) => (e.target.value));
                         }}
                     />
 
@@ -300,43 +305,34 @@ export default function BuildCharacter() {
                           getProfBonus={profBonus}
                           />
 
-                        {EquipmentPane({equipment, setEquipment})}
+                        <EquipmentPane
+                          equipment={equipment}
+                          setEquipment={setEquipment}
+                          />
 
 
                     </div>
                     <div id="box8">
-                        
-                        <FlavorPane />
 
-                        <h2>Features & Traits</h2>
-                        <textarea
-                            class="featuresandtraits"
-                            cols="40"
-                            rows="9"
-                            onChange={(e) => {
-                                setFeatsTraits(e.target.value);
-                            }}
-                        /> <br/ >
+                        <FlavorPane
+                          p={[personalityTraits, setPersonalityTraits]}
+                          i={[ideals, setIdeals]}
+                          b={[bonds, setBonds]}
+                          f={[flaws, setFlaws]}
+                        />
+
+                        <FeatsTraitsPane
+                          featsTraits={featsTraits}
+                          setFeatsTraits={setFeatsTraits}
+                        />
+
+                    <br/ >
                     </div>
                 </div>
                 <div id="box9">
                     <button class="saveButton" onClick={onSubmit}>Save Character</button>
-                    <a className="hidden"
-                                        download={"character.json"}
-                                        href={fileDownloadUrl}
-                                        ref={doFileDownload}
-                                        />
                     <button class="cancelButton">Cancel</button>
-                    <ExportButton
-                                  data={[characterName, charClass, level, race, background, alignment, experience, playerName,
-                                    strength, dexterity, constitution, intelligence, wisdom, charisma,
-                                    armorClass, initiative, speed,
-                                  //  acrobatics, animalHandling, arcana, athletics,
-                                  //  deception, history, insight, intimidation, investigation, medicine, nature,
-                                  //  perception, performance, persuasion, religion, sleightOfHand, stealth, survival,
-                                    maxHitPoints, /*strThrow, dexThrow, conThrow, intThrow, wisThrow, chaThrow,*/ darkVision,
-                                    equipment, /*personalityTraits, ideals, bonds, flaws,*/ featsTraits
-                                 ]} />
+                    <ExportButton data={getCharacterStruct()} />
                 </div>
             </div>
         </body>
