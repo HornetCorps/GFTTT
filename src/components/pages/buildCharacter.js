@@ -7,11 +7,13 @@ import SavingThrowsPane from './SavingThrowsPane.js';
 import FlavorPane from './FlavorPane.js';
 import EquipmentPane from './EquipmentPane.js';
 import ExportButton from '../ExportButton.js';
+import ImportButton from '../ImportButton.js';
+import FeatsTraitsPane from './FeatsTraitsPane';
 import armLogo from '../images/img-18.png';
 import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
 
-export default function BuildCharacter() {
+export default function BuildCharacter({userID}) {
     const profBonus = (() => (2+Math.floor((level-1)/4)));
 
     const [characterName, setCharacterName] = useState('');
@@ -77,6 +79,7 @@ export default function BuildCharacter() {
 
     function getCharacterStruct() {
       return {
+            userID: userID.uid,
             name: characterName, class: charClass, level: level, race: race,
             background: background, alignment: alignment, experience: experience,
             player: playerName,
@@ -107,17 +110,74 @@ export default function BuildCharacter() {
             feats: featsTraits
       };
     }
+
+    function importChar(strJson) {
+      const c = JSON.parse(strJson).character;
+      setCharacterName(c.name);
+      setCharClass(c.class);
+      setLevel(c.level);
+      setRace(c.race);
+      setBackground(c.background);
+      setAlignment(c.alignment);
+      setExperience(c.experience);
+      setPlayerName(c.player);
+      setStrength(c.abilities.strength);
+      setDexterity(c.abilities.dexterity);
+      setConstitution(c.abilities.constitution);
+      setIntelligence(c.abilities.intelligence);
+      setWisdom(c.abilities.wisdom);
+      setCharisma(c.abilities.charisma);
+      setAcrobatics(c.skillProfs.acrobatics);
+      setAnimalHandling(c.skillProfs.animalHandling);
+      setArcana(c.skillProfs.arcana);
+      setAthletics(c.skillProfs.athletics);
+      setDeception(c.skillProfs.deception);
+      setHistory(c.skillProfs.history);
+      setInsight(c.skillProfs.insight);
+      setIntimidation(c.skillProfs.intimidation);
+      setInvestigation(c.skillProfs.investigation);
+      setMedicine(c.skillProfs.medicine);
+      setNature(c.skillProfs.nature);
+      setPerception(c.skillProfs.perception);
+      setPerformance(c.skillProfs.performance);
+      setPersuasion(c.skillProfs.performance);
+      setReligion(c.skillProfs.religion);
+      setSleightOfHand(c.skillProfs.sleightOfHand);
+      setStealth(c.skillProfs.stealth);
+      setSurvival(c.skillProfs.survival);
+      setArmorClass(c.ac);
+      setInitiative(c.initiative);
+      setSpeed(c.speed);
+      setMaxHitPoints(c.maxHitPoints);
+      setDarkVision(c.darkVision);
+      setStrThrow(c.throwProfs.strength);
+      setDexThrow(c.throwProfs.dexterity);
+      setConThrow(c.throwProfs.constitution);
+      setIntThrow(c.throwProfs.intelligence);
+      setWisThrow(c.throwProfs.wisdom);
+      setChaThrow(c.throwProfs.charisma);
+      setEquipment(c.equipment);
+      setPersonalityTraits(c.flavor.personalityTraits);
+      setIdeals(c.flavor.ideals);
+      setBonds(c.flavor.bonds);
+      setFlaws(c.flavor.flaws);
+      setFeatsTraits(c.feats);
+    }
+
     async function onSubmit(e) {
-      /*  e.preventDefault();
+        e.preventDefault();
+        const buildCharacterSave = {userID: userID.uid,
+                                    characterName: characterName,
+                                    charClass: charClass,
+                                    level: level,
+                                    race: race};
         for (const key in buildCharacterSave) {
-            if (buildCharacterSave[key] == null) {
-                window.alert("All fields required.");
+            if (!buildCharacterSave[key]) {
+                window.alert("Character must have a name, class, and level to be saved");
                 return;
             }
         }
-        console.log(typeof buildCharacterSave);
-
-            await fetch("http://localhost:5000/api/buildCharacter-create", {
+            await fetch("http://localhost:5000/api/saveCharacter", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -126,12 +186,9 @@ export default function BuildCharacter() {
                 body: JSON.stringify(buildCharacterSave),
             })
             .catch(error => {
-                window.alert(error);
+                console.log(error);
                 return;
             });
-
-            window.alert("save sucessful");
-*/
     }
 
     return <div className='buildCharacter'>
@@ -143,6 +200,7 @@ export default function BuildCharacter() {
                     <input
                         type="text"
                         class="characterName"
+                        value={characterName}
                         onChange={(e) => setCharacterName(e.target.value)}
                     />
                 </div>
@@ -152,6 +210,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterInfo"
+                        value={charClass}
                         onChange={(e) => {
                             setCharClass((_) => (e.target.value));
                         }}
@@ -161,6 +220,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterLevel"
+                        value={level}
                         onChange={(e) => {
                             setLevel(e.target.value);
                         }}
@@ -169,6 +229,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterInfo"
+                        value={race}
                         onChange={(e) => {
                             setRace(e.target.value);
                         }}
@@ -177,6 +238,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterInfo"
+                        value={background}
                         onChange={(e) => {
                             setBackground(e.target.value);
                         }}
@@ -185,6 +247,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterInfo"
+                        value={alignment}
                         onChange={(e) => {
                             setAlignment(e.target.value);
                         }}
@@ -193,6 +256,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterExperience"
+                        value={experience}
                         onChange={(e) => {
                             setExperience(e.target.value);
                         }}
@@ -201,6 +265,7 @@ export default function BuildCharacter() {
                     <input
                         type ="text"
                         class="characterInfo"
+                        value={playerName}
                         onChange={(e) => {
                             setPlayerName(e.target.value);
                         }}
@@ -222,6 +287,7 @@ export default function BuildCharacter() {
                             <input
                                 type="text"
                                 class="armorClass"
+                                value={armorClass}
                                 onChange={(e) => {
                                     setArmorClass(e.target.value);
                                 }}
@@ -229,6 +295,7 @@ export default function BuildCharacter() {
                             <h2>Initiative</h2>
                             <input
                                 type="text"
+                                value={initiative}
                                 class ="stats"
                                 onChange={(e) => {
                                     setInitiative(e.target.value);
@@ -239,6 +306,7 @@ export default function BuildCharacter() {
                             <input
                                 type="text"
                                 class ="stats"
+                                value={speed}
                                 onChange={(e) => {
                                     setSpeed(e.target.value);
                                 }}
@@ -280,6 +348,7 @@ export default function BuildCharacter() {
                         <input
                             type="text"
                             class="throws"
+                            value={maxHitPoints}
                             onChange={(e) => {
                                 setMaxHitPoints(e.target.value);
                             }}
@@ -290,6 +359,7 @@ export default function BuildCharacter() {
                         <input
                             type="text"
                             class="skills"
+                            value={darkVision}
                             onChange={(e) => {
                                 setDarkVision(e.target.value);
                             }}
@@ -333,6 +403,7 @@ export default function BuildCharacter() {
                     <button class="saveButton" onClick={onSubmit}>Save Character</button>
                     <button class="cancelButton">Cancel</button>
                     <ExportButton data={getCharacterStruct()} />
+                    <ImportButton importChar={importChar} />
                 </div>
             </div>
         </body>

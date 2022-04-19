@@ -1,30 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../../App.css';
 import './inventory.css';
 import { BuildButton } from '../BuildButton';
 import { ViewButton } from '../ViewButton'
 
-export default function Inventory() {
+export default function Inventory({userID}) {
+    const [charList, setCharList] = useState([]);
 
-    const charList = [ 
-        { 
-            characterName: 'Chaerieth Casilltenirra', 
-            charClass: 'Rogue', 
-            level: 3, 
-            race: 'Human'
-        }, 
-        { 
-            characterName: 'Elijah Truthforest', 
-            charClass: 'Rogue', 
-            level: 2, 
-            race: 'Human'
+    useEffect(()=> {
+      const getCharacterList = async () => {
+        try {
+          const res = await fetch("http://localhost:5000/api/getCharacter/"+(userID.uid));
+          if(!res.ok) throw Error("Failed to get data.");
+          const chars = await res.json();
+          setCharList(chars);
+        } catch (err) {
+          console.log(err);
         }
-    ]
+      }
+      setTimeout(()=> getCharacterList(), 10);
+    }, [userID]);
 
-    function CharacterList({ character }) { 
+    function CharacterList({ character }) {
         return  (
-            <div className='character'> 
-                <div className='character-name'> 
+            <div className='character'>
+                <div className='character-name'>
                    {character.characterName}
                 </div>
                 <hr />
@@ -32,26 +32,26 @@ export default function Inventory() {
                 <div className='button'>
                     <ViewButton >View</ViewButton>
                 </div>
-            </div> 
+            </div>
         )
     }
 
-    function CharacterGallery() { 
-        return ( 
+    function CharacterGallery() {
+        return (
             <div className='character-gallery'>
-                {charList.map((character) => ( 
-                    <CharacterList 
+                {charList.map((character) => (
+                    <CharacterList
                         key={character.characterName}
                         character={character}
                     />
-            ))}   
+            ))}
             </div>
         )
     }
 
     return <div className='inventory'>
         <h1>My Character</h1>
-        <div class='characters-gallery'> 
+        <div class='characters-gallery'>
             <CharacterGallery />
         </div>
         <div className='build-button'>

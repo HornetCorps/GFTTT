@@ -1,6 +1,7 @@
 import React from 'react';
+import './pages/buildCharacter.css'
 
-export class ImportButton extends React.Component {
+export default class ImportButton extends React.Component {
     constructor(props) {
         super(props)
 
@@ -9,21 +10,6 @@ export class ImportButton extends React.Component {
             json: "states.json",
             csv: "states.csv",
             text: "states.txt"
-        }
-        this.state = {
-            fileType: defaultFileType,
-            fileDownloadUrl: null,
-            status: "",
-            data: [
-                { state: "Arizona",        electors: 11 },
-                { state: "Florida",        electors: 29 },
-                { state: "Iowa",           electors:  6 },
-                { state: "Michigan",       electors: 16 },
-                { state: "North Carolina", electors: 15 },
-                { state: "Ohio",           electors: 18 },
-                { state: "Pennsylvania",   electors: 20 },
-                { state: "Wisconsin",      electors: 10 },
-            ]
         }
         this.upload = this.upload.bind(this);
         this.openFile = this.openFile.bind(this);
@@ -38,18 +24,13 @@ export class ImportButton extends React.Component {
      * Process the file within the React app. We're NOT uploading it to the server!
      */
     openFile(evt) {
-        let status = []; // Status output
         const fileObj = evt.target.files[0];
         const reader = new FileReader();
 
         let fileloaded = e => {
             // e.target.result is the file's content as text
             const fileContents = e.target.result;
-            status.push(`File name: "${fileObj.name}". Length: ${fileContents.length} bytes.`);
-            // Show first 80 characters of the file
-            const first80char = fileContents.substring(0,80);
-            status.push (`First 80 characters of the file:\n${first80char}`)
-            this.setState ({status: status.join("\n")})
+            this.props.importChar(fileContents);
         }
 
         // Mainline of the method
@@ -61,7 +42,7 @@ export class ImportButton extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.upload}>
+                <button onClick={this.upload} class='cancelButton'>
                     Import Data
                 </button>
 

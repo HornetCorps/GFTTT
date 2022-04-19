@@ -9,6 +9,10 @@ import wisLogo from '../images/img-16.png';
 import chaLogo from '../images/img-17.png';
 import editIcon from '../images/icons8-quill-pen-64.png'
 import randIcon from '../images/randomScoresIcon.svg'
+import upArrow from '../images/arrow_up.svg'
+import downArrow from '../images/arrow_down.svg'
+import stdArray from '../images/standard_array.svg'
+import pointBuy from '../images/point_buy.svg'
 
 const rollScore = (() => {
   const d6 = (() => (1 + Math.floor(Math.random() * 6)));
@@ -30,6 +34,19 @@ export default function AbScorePane({ str, dex, con, int, wis, cha }) {
     { name: "Charisma", logo: chaLogo, val: cha[0], updater: cha[1] }
   ];
 
+  function swapScore(i, j) {
+    const temp = scores[i].val;
+    scores[i].updater(scores[j].val);
+    scores[j].updater(temp);
+  }
+
+  function totalPoints() {
+    const costTable = {8:0, 9:1, 10:2, 11:3, 12:4, 13:5, 14:7, 15:9};
+    return scores
+            .map((score)=> costTable[score.val])
+            .reduce((sum, x)=> sum + x, 0);
+  }
+
   function AbScoreTopBar() {
     const toggleEditing = () => { setEditing(!editing) };
 
@@ -41,11 +58,13 @@ export default function AbScorePane({ str, dex, con, int, wis, cha }) {
       <img class="editButton" src={editIcon}
         alt="Edit Abilities"
         onClick={toggleEditing} />
-      {editing &&
+      {editing && <>
         <img class="editButton" src={randIcon}
           alt="Roll Random Abilities"
           onClick={rollRandomScores} />
-      }
+        <img class="editButton" src={stdArray}/>
+        <img class="editButton" src={pointBuy}/>
+      </>}
     </div>
   }
 

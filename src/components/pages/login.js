@@ -5,19 +5,19 @@ import { useNavigate } from "react-router";
 import {auth} from "../../firebase-config";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
-export default function Login() {
+export default function Login({user}) {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState({});
+    const [userAuth, setUserAuth] = user;
 
     onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
+        setUserAuth(currentUser);
       });
 
     const [loginEmail, setLoginEmail ] = useState("")
     //const [username, setUsernameReg] = useState();
     const [loginPassword, setLoginPassword] = useState("");
-    
+
     async function onSubmit(e) {
         try {
             const user = await signInWithEmailAndPassword(
@@ -37,16 +37,16 @@ export default function Login() {
     return <div className='login'>
         <h1>Login</h1>
         <label>Email</label>
-        <input 
-            type="text" 
+        <input
+            type="text"
             placeholder="Email"
             onChange={(e) => {
                 setLoginEmail(e.target.value);
             }}
         />
         <label>Password</label>
-        <input 
-            type="password" 
+        <input
+            type="password"
             placeholder="password"
             onChange={(e) => {
                 setLoginPassword(e.target.value);
@@ -57,7 +57,7 @@ export default function Login() {
         <button2 onClick={logout}> Sign Out</button2>
 
         <h2> User Logged In: </h2>
-        <text>{user?.email}</text>
-        <text>{user?.uid}</text>
+        <text>{userAuth?.email}</text>
+        <text>{userAuth?.uid}</text>
     </div>
 }

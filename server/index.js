@@ -2,23 +2,23 @@ require('dotenv').config()
 
 // DB Connection URI, both local and dev
 //const uri = process.env.DB_URL
-const uri = "mongodb://localhost:27017"
+const uri = "mongodb://localhost:27017";
 
 // Create a new MongoClient
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(uri);
 
 //Create a new mongoose connection to specific database for mongoose models
-database = "/GFTTT"
-mongooseURI = uri + database
-const mongoose = require("mongoose");
-mongoose.connect(mongooseURI)
-.then(() => {
-  console.log("mongoose connection successful")
-})
-.catch(err => {
-  console.error("connection error")
-})
+// const database = "/GFTTT"
+// const mongooseURI = uri + database
+// const mongoose = require("mongoose");
+// mongoose.connect(mongooseURI)
+// .then(() => {
+//   console.log("mongoose connection successful")
+// })
+// .catch(err => {
+//   console.error("connection error")
+// })
 
 //Importing Mongoose Models
 const characterModel = require('./models/Character');
@@ -35,39 +35,42 @@ app.use(express.json());
 
 //API Functions
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
+  res.json({ message: "Hello from server!!" });
 });
 
 app.post('/api/saveCharacter', cors(), (req, res)=>{
-  const newCharacter = newCharacterModel()
-  newCharacter.playerName = req.body.playerName
-  newCharacter.characterName = req.body.characterName
-  characterModel.find({playerName: req.body.playerName}, function(err, data){
-    if(data){
-      res.send("Character already exists.");
-    }
-    else{
-      newCharacter.save(function(err,data) {
-        if(err){
-          console.log(err);
-        }
-        else{
-          res.send("character created.");
-        }
-      });
-    }
-  })
-})
+  client.connect();
+  const table = client
+                .db("GFTTT")
+                .collection("characters");
+  table.countDocuments({userID: req.body.userID,
+                  characterName: req.body.characterName,
+                  className: req.body.className,
+                  level: req.body.level},
+                (err, res)=> {
+                  if(err) {console.log(err);}
+                  else if (res > 0) {console.log("Duplicate, skipping.");}
+                  else {
+                    table.insertOne(req.body);
+                  }
+          })
+  }
+)
 
-app.get('/api/getCharacter', cors(), (req,res)=>{
-  characterModel.find({playerName: req.body.playerName}, function(err, data){
-    if(err){
-      console.log(err);
+app.get('/api/getCharacter/:userID', cors(), (req,res)=>{
+  client.connect();
+  const table = client
+                .db("GFTTT")
+                .collection("characters");
+  console.log(req.params);
+  table.find({userID: req.params.userID}).toArray(
+    (err, data) => {
+      if(err) {console.log(err);}
+      else {
+        res.json(data);
+      }
     }
-    else{
-      res.json(data);
-    }
-  })
+  );
 })
 
 app.get('/api/compendium/retrive-all', cors(), (req, res)=>{
@@ -461,7 +464,7 @@ app.post('/api/login', cors(), (req, res)=>{
         }
         if(isPassword){
           //user and password is correct
-          var cursor = db.collection('email-user-pass').find({ 
+          var cursor = db.collection('email-user-pass').find({
             username: username
           });
           cursor.forEach(

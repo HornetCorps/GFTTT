@@ -1,37 +1,22 @@
 import React from 'react';
+import './pages/buildCharacter.css'
 
-export class ExportButton extends React.Component {
+export default class ExportButton extends React.Component {
 
-    constructor(data, props) {
+    constructor(props) {
         super(props);
 
         this.state = {
             fileType: "json",
             fileDownloadUrl: null,
             status: "",
-            // Example data can be replaced with something else
-            data: [
-                { state: "Arizona",        electors: 11 },
-                { state: "Florida",        electors: 29 },
-                { state: "Iowa",           electors:  6 },
-                { state: "Michigan",       electors: 16 },
-                { state: "North Carolina", electors: 15 },
-                { state: "Ohio",           electors: 18 },
-                { state: "Pennsylvania",   electors: 20 },
-                { state: "Wisconsin",      electors: 10 },
-            ]
         }
         this.download = this.download.bind(this);
     }
 
-    setData(data) {
-        this.state.data = data;
-    }
-
     download (event) {
         event.preventDefault();
-
-        let output = JSON.stringify({states: this.state.data},
+        let output = JSON.stringify({character: this.props.data},
             null, 4);
 
         // Download it
@@ -48,12 +33,12 @@ export class ExportButton extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.download}>
+                <button onClick={this.download} class='cancelButton'>
                     Export File
                 </button>
 
                 <a className="hidden"
-                    download={"data.json"}
+                    download={this.props.data.name ? this.props.data.name+".json": "data.json"}
                     href={this.state.fileDownloadUrl}
                     ref={e => this.dofileDownload = e}
                     />
