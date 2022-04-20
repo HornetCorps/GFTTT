@@ -16,13 +16,11 @@
 .hero-container > h1 {
   color: #eda800;
   font-size: 100px;
-  margin-top: -150px;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
-.hero-container > p {
+.hero-container > h2 {
   color: #eda800;
   font-size: 30px;
-  margin-top: -70px;
   margin-bottom: 50px;
 }

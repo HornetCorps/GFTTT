@@ -70,10 +70,10 @@ export default function FeatsTraitsPane({featsTraits, setFeatsTraits}) {
         </div>
     }
 
-    return <>
+    return <div class = "FT">
         <FeatsTraitsTopBar />
         <FeatsTraits />
     
-    </>
+    </div>
 
 }

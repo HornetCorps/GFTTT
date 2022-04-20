@@ -14,7 +14,7 @@
 .help,
 .play {
   background-image: url(./components/images/img-7.jpg);
-  height: 93vh;
+  height: 100vh;
   width: 100%;
   display: inline-flex;
   flex-flow: row wrap;

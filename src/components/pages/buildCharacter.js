@@ -384,6 +384,11 @@ export default function BuildCharacter({userID}) {
                     </div>
                     <div id="box8">
 
+                        <FeatsTraitsPane
+                          featsTraits={featsTraits}
+                          setFeatsTraits={setFeatsTraits}
+                        />
+
                         <FlavorPane
                           p={[personalityTraits, setPersonalityTraits]}
                           i={[ideals, setIdeals]}
@@ -391,10 +396,7 @@ export default function BuildCharacter({userID}) {
                           f={[flaws, setFlaws]}
                         />
 
-                        <FeatsTraitsPane
-                          featsTraits={featsTraits}
-                          setFeatsTraits={setFeatsTraits}
-                        />
+
 
                     <br/ >
                     </div>
