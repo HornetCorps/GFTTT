@@ -20,7 +20,7 @@ export const RegisterButton = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
     return (
-        <Link to='/register' className='btn-mobile'>
+        <Link to='/register' className='btn-mobile' data-testid="registerButton">
             <button
             className={`regibtn ${checkButtonStyle} ${checkButtonSize}`}
             onClick={onClick}

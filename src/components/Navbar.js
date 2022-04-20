@@ -22,7 +22,7 @@ function Navbar() {
 
     return (
         <>
-          <nav className="navbar">
+          <nav data-testid="Navbar" className="navbar">
               <div className="navbar-container">
                   <Link to="/" className="navbar-logo" onClick={closeMobileMenu}> 
                    Goblin Forge Table Top Tools

@@ -6,7 +6,7 @@ import { RegisterButton } from './RegisterButton';
 import { LoginButton } from './LoginButton';
 function HeroSection() {
     return (
-        <div className='hero-container'>
+        <div className='hero-container' data-testid="hero-container">
             <h1>Welcome</h1>
             <h2>Start Your Adventure Now</h2>
             <div className="hero-btns">

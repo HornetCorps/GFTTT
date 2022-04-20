@@ -32,7 +32,7 @@ export default class ExportButton extends React.Component {
 
     render() {
         return (
-            <div>
+            <div data-testid="exportButton">
                 <button onClick={this.download} class='cancelButton'>
                     Export File
                 </button>

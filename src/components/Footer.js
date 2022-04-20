@@ -3,7 +3,7 @@ import { Button } from './Button'
 import './Footer.css'
 function Footer() {
     return (
-        <div className='footer-container'>
+        <div data-testid="footer-container" className='footer-container'>
             <section className="footer-subscription">
                 <p className="footer-subscription-heading">
                     Join the Goblin Forge newsletter to recieve updates

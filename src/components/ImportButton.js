@@ -41,7 +41,7 @@ export default class ImportButton extends React.Component {
 
     render() {
         return (
-            <div>
+            <div data-testid="importButton">
                 <button onClick={this.upload} class='cancelButton'>
                     Import Data
                 </button>
