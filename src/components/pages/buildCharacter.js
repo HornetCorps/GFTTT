@@ -402,7 +402,7 @@ export default function BuildCharacter({userID}) {
                     </div>
                 </div>
                 <div id="box9">
-                    <button class="saveButton" onClick={onSubmit}>Save Character</button>
+                    <button class="saveButton" onClick={onSubmit}>Save</button>
                     <button class="cancelButton">Cancel</button>
                     <ExportButton data={getCharacterStruct()} />
                     <ImportButton importChar={importChar} />

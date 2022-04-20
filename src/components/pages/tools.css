@@ -1,0 +1,31 @@
+#toolsTextBox {
+  width: 70%;
+  background-color: #ffffff99;
+  padding: 20px;
+}
+
+#toolsTextBox > p {
+  text-align: justify;
+  font-size: 16pt;
+  padding-bottom: 10px;
+}
+
+#toolsTextBox.bolded {
+  font-weight: bold;
+  font-color: red;
+}
+
+.tools { /*this is overriding .tools in App.css*/
+  padding-top: 100px;
+  height: initial;
+}
+
+#toolsTextBox > h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#toolsTextBox > h2 {
+  text-align: center;
+  margin-top: 20px;
+}
