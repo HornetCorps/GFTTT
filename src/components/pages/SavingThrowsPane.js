@@ -28,7 +28,6 @@ export default function SavingThrowsPane({str, dex, con, int, wis, cha, getProfB
 
   function SaveItem(save)  {
     return <div class='SavingThrow'>
-
       {editing
         ? (save.val
           ? <img class='saveThrowIcon'
@@ -42,7 +41,7 @@ export default function SavingThrowsPane({str, dex, con, int, wis, cha, getProfB
           : <img class='saveThrowIcon' src={profNone}/>)
       }
       <h3 class='saveThrowBonus'>
-        {(save.mod + ((save.val)?(getProfBonus()):(0))>0) ?? '+'}
+        {((save.mod + ((save.val)?(getProfBonus()):(0)))>0) && '+'}
         {save.mod + ((save.val)?(getProfBonus()):(0))}
       </h3>
       <h3 class='saveThrowName'>{save.name}</h3>

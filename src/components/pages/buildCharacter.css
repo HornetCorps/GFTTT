@@ -77,11 +77,18 @@
   font-size: large;
 }
 
-.skills-list,
+.skills-list {
+  display: inline-block;
+  font-size: 1.1rem;
+  margin-left: 5px;
+}
+
 .saveThrowName {
   display: inline-block;
   font-size: 1.1rem;
   margin-left: 5px;
+  width: 70px;
+  justify-content: flex-start;
 }
 
 .skillsTitle {
@@ -145,6 +152,13 @@
 #SavingThrowsTopBar {
   display: flex;
   justify-content: center;
+}
+
+#SavingThrowsPane {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .characterName {
@@ -359,7 +373,12 @@
 }
 
 #SavingThrowsList {
-  display: table;
-  direction: column;
+  display: flex;
+  flex-direction: column;
   padding-top: 20px;
+}
+
+.SavingThrow {
+  display: inline-flex;
+  justify-content: center;
 }
