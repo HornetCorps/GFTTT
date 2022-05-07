@@ -12,13 +12,14 @@ import FeatsTraitsPane from './FeatsTraitsPane';
 import armLogo from '../images/img-18.png';
 import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
+import MiscPane from './MiscPane';
 
 export default function BuildCharacter({userID}) {
     const profBonus = (() => (2+Math.floor((level-1)/4)));
 
     const [characterName, setCharacterName] = useState('');
     const [charClass, setCharClass] = useState('');
-    const [level, setLevel] = useState(1);
+    const [level, setLevel] = useState(0);
     const [race, setRace] = useState('');
     const [background, setBackground] = useState('');
     const [alignment, setAlignment] = useState('');
@@ -195,82 +196,16 @@ export default function BuildCharacter({userID}) {
         <h1> Build A Character</h1>
         <body>
             <div class="box-wrapper">
-                <div id="box1">
-                    Character Name:
-                    <input
-                        type="text"
-                        class="characterName"
-                        value={characterName}
-                        onChange={(e) => setCharacterName(e.target.value)}
-                    />
-                </div>
-                <div id="box2">
-
-                    Class:
-                    <input
-                        type ="text"
-                        class="characterInfo"
-                        value={charClass}
-                        onChange={(e) => {
-                            setCharClass((_) => (e.target.value));
-                        }}
-                    />
-
-                    Level:
-                    <input
-                        type ="text"
-                        class="characterLevel"
-                        value={level}
-                        onChange={(e) => {
-                            setLevel(e.target.value);
-                        }}
-                    />
-                    Race:
-                    <input
-                        type ="text"
-                        class="characterInfo"
-                        value={race}
-                        onChange={(e) => {
-                            setRace(e.target.value);
-                        }}
-                    />
-                    Background:
-                    <input
-                        type ="text"
-                        class="characterInfo"
-                        value={background}
-                        onChange={(e) => {
-                            setBackground(e.target.value);
-                        }}
-                    />
-                    Alignment:
-                    <input
-                        type ="text"
-                        class="characterInfo"
-                        value={alignment}
-                        onChange={(e) => {
-                            setAlignment(e.target.value);
-                        }}
-                    />
-                    Experience Points:
-                    <input
-                        type ="text"
-                        class="characterExperience"
-                        value={experience}
-                        onChange={(e) => {
-                            setExperience(e.target.value);
-                        }}
-                    />
-                    Player Name:
-                    <input
-                        type ="text"
-                        class="characterInfo"
-                        value={playerName}
-                        onChange={(e) => {
-                            setPlayerName(e.target.value);
-                        }}
-                    />
-                </div>
+                <MiscPane
+                        cName = {[characterName, setCharacterName]}
+                        cClass = {[charClass, setCharClass]}
+                        cLevel = {[level, setLevel]}
+                        cRace = {[race, setRace]}
+                        cBackground = {[background, setBackground]}
+                        cAlignment = {[alignment, setAlignment]}
+                        cExperience = {[experience, setExperience]}
+                        cPlayer = {[playerName, setPlayerName]}
+                />
                 <div id="box3">
                     <AbScorePane
                       str={[strength, setStrength]}
