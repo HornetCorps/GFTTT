@@ -3,28 +3,86 @@ import '../../App.css';
 import './buildCharacter.css';
 import editIcon from '../images/icons8-quill-pen-64.png'
 
-function TextInputHandler({saveText, currText}) {
-    const [textString, setTextString] = useState("");
-    const onChange = e => {
-      setTextString(e.target.value);
+function TextInputHandler({savePersonalityText, currPersonalityText,
+                            saveIdealsText, currIdealsText,
+                            saveBondsText, currBondsText,
+                            saveFlawsText, currFlawsText}) {
+
+    const [textStringPersonality, setTextStringPersonality] = useState("");
+    const [textStringIdeals, setTextStringIdeals] = useState("");
+    const [textStringBonds, setTextStringBonds] = useState("");
+    const [textStringFlaws, setTextStringFlaws] = useState("");
+
+    const onChangePersonality = e => {
+      setTextStringPersonality(e.target.value);
     };
+
+    const onChangeIdeals = e => {
+      setTextStringIdeals(e.target.value);
+    };
+
+    const onChangeBonds = e => {
+        setTextStringBonds(e.target.value);
+    };
+
+    const onChangeFlaws = e => {
+        setTextStringFlaws(e.target.value);
+    };
+
     const onSubmit = (e) => {
-        if(textString != ""){
-            saveText(textString);
-            setTextString("");
+        if(textStringPersonality != ""){
+            savePersonalityText(textStringPersonality);
+            setTextStringPersonality("");
+        }
+        if(textStringIdeals != ""){
+            saveIdealsText(textStringIdeals);
+            setTextStringIdeals("");
+        }
+        if(textStringBonds != ""){
+            saveBondsText(textStringBonds);
+            setTextStringBonds("");
+        }
+        if(textStringFlaws != ""){
+            saveFlawsText(textStringFlaws);
+            setTextStringFlaws("");
         }
     }
     return <>
     <div class="flavors-form">
+        Personality Traits
         <textarea
             class='flavors'
-            placeholder={currText || "Type here."}
-            value={textString} 
-            onChange={onChange}
+            placeholder={currPersonalityText || "Type here."}
+            value={textStringPersonality} 
+            onChange={onChangePersonality}
             onSubmit={onSubmit}
         />
-        <button class="flavorsButton" type="submit" onClick={onSubmit}>Update</button>
+        Ideals
+        <textarea
+            class='flavors'
+            placeholder={currIdealsText || "Type here."}
+            value={textStringIdeals} 
+            onChange={onChangeIdeals}
+            onSubmit={onSubmit}
+        />
+        Bonds
+        <textarea
+            class='flavors'
+            placeholder={currBondsText || "Type here."}
+            value={textStringBonds} 
+            onChange={onChangeBonds}
+            onSubmit={onSubmit}
+        />
+        Flaws
+        <textarea
+            class='flavors'
+            placeholder={currFlawsText || "Type here."}
+            value={textStringFlaws} 
+            onChange={onChangeFlaws}
+            onSubmit={onSubmit}
+        />
     </div>
+    <button class="flavorsButton" type="submit" onClick={onSubmit}>Update</button>
     </>
 }
 
@@ -52,28 +110,35 @@ export default function FlavorPane({p, i, b, f}) {
         </div>
   }
 
-  function Flavor(){
-        return<>
-            {editing ? "Click update and then exit edit mode to see changes" : ""}
-            {flavors.map(
-                (flavor) => (
-                    <>
-                    <h3>{flavor.name}</h3>
-                    {editing ?
-                        <>
-                        <TextInputHandler
-                            currText={flavor.val}
-                            saveText={flavor.updater}
-                        />
-                        </>
-                        :
-                        <div class="flavors">{flavor.val}</div>
-                    }
-                    </>
-                )
-            )}
-        </>;
-  }
+function Flavor(){
+    return<>
+        {editing ?
+        <>
+            <TextInputHandler
+                currPersonalityText={p[0]}
+                savePersonalityText={p[1]}
+                currIdealsText={i[0]}
+                saveIdealsText={i[1]}
+                currBondsText={b[0]}
+                saveBondsText={b[1]}
+                currFlawsText={f[0]}
+                saveFlawsText={f[1]}
+            />
+        </>
+        :
+        <>
+            Personality Traits
+            <div class="flavors">{p[0]}</div>
+            Ideals
+            <div class="flavors">{i[0]}</div>
+            Bonds
+            <div class="flavors">{b[0]}</div>
+            Flaws
+            <div class="flavors">{f[0]}</div>
+        </>
+        }
+    </>;
+}
 
   return <div id="FlavorPane">
       <FlavorTopBar />
