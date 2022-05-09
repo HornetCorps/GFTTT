@@ -14,13 +14,13 @@ import hitLogo from '../images/img-19.png';
 import visLogo from '../images/img-20.png';
 import MiscPane from './MiscPane';
 
-export default function BuildCharacter({userID}) {
+export default function BuildCharacter({userID, inventoryData}) {
     const profBonus = (() => (2+Math.floor((level-1)/4)));
 
-    const [characterName, setCharacterName] = useState('');
-    const [charClass, setCharClass] = useState('');
-    const [level, setLevel] = useState(0);
-    const [race, setRace] = useState('');
+    const [characterName, setCharacterName] = useState(inventoryData.name || '');
+    const [charClass, setCharClass] = useState(inventoryData.class || '');
+    const [level, setLevel] = useState(inventoryData.level || 0);
+    const [race, setRace] = useState(inventoryData.race || '');
     const [background, setBackground] = useState('');
     const [alignment, setAlignment] = useState('');
     const [experience, setExperience] = useState(0);

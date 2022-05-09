@@ -47,6 +47,22 @@ app.post('/api/saveProfile', cors(), (req, res)=>{
   //table.insertOne(req.body);
 })
 
+app.post('/api/deleteCharacter', cors(), (req, res)=>{
+  client.connect();
+  const table = client
+                .db("GFTTT")
+                .collection("characters");
+  table.deleteOne(req.body, 
+                   (err, data) => { 
+                     if(err) {console.log(err);}
+                     else { 
+                       console.log(data.deletedCount)
+                     }
+                   }
+                  );
+  }
+)
+
 app.get('/api/getProfile/:userID', cors(), (req,res)=>{
   client.connect();
   const table = client
