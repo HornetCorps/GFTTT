@@ -1,24 +1,57 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../../App.css';
 import './profile.css';
 import profilePlaceHolder from '../images/profilePlaceHolder.jpg';
+import ProfilePane from './ProfilePane.js';
 
-export default function Profile() {
+
+export default function Profile({userID}) {
+
+    const [profileName, setProfileName] = useState('');
+    const [aboutMe, setAboutMe] = useState('');
+
+
+    async function onSubmit(e) {
+        e.preventDefault();
+        const profileSave = { userID: userID.uid,
+                                    profileName: profileName,
+                                    aboutMe: aboutMe};
+
+        await fetch("http://localhost:5000/api/saveProfile", {
+            method: "POST",
+               headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+               },
+            body: JSON.stringify(profileSave),
+        })
+        .catch(error => {
+             console.log(error);
+            return;
+        });
+
+    }
+    useEffect(()=> {
+        const getProfileInfo = async () => {
+            try {
+                const res = await fetch("http://localhost:5000/api/getProfile/"+(userID.uid));
+                if(!res.ok) throw Error("Failed to get data.");
+                const info = await res.json();
+                console.log(info.toString)
+                setProfileName(info.profileName || "");
+                setAboutMe(info.aboutMe || "");
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        setTimeout(()=> getProfileInfo(), 10);
+    }, [userID]);
+
     return <div class="profile">
-        <div class="BoxWrapper">
-            <div id="Box1">
-                <img class="profilePlaceHolder" src={profilePlaceHolder} alt="icon of a cute goblin"/>
-            </div>
-            <div id="Box2">
-                <div id="Box3">
-                    <h2 class="DisplayName">Display Name:</h2>
-                    <input type="text" label="dName" class="dName"></input>
-                </div>
-                <div id="Box4">
-                   <p class="AboutMe">About Me:</p>
-                   <textarea label="aboutMe" class="aboutMe" cols="40" rows="13"></textarea>
-                </div>
-            </div>
-        </div>
+        <ProfilePane 
+            pN = {[profileName,setProfileName]}
+            aM = {[aboutMe, setAboutMe]}
+        />
+        <button onClick={onSubmit}>SAVE</button>     
     </div>
 }

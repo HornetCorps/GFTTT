@@ -25,7 +25,7 @@ function App() {
           <Route path='/help' exact element={<Help />}/>
           <Route path='/inventory' exact element={<Inventory userID={userID} />}/>
           <Route path='/play' exact element={<Play />}/>
-          <Route path='/profile' exact element={<Profile />}/>
+          <Route path='/profile' exact element={<Profile userID={userID} />}/>
           <Route path='/tools' exact element={<Tools />}/>
           <Route path='/login' exact element={<Login user={[userID, setUserID]} />}/>
           <Route path='/register' exact element={<Register user={[userID, setUserID]} />}/>
