@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {  getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider  } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -20,5 +20,15 @@ const firebaseConfig = {
 
 // Initializes the firebase App
 const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider();
+const providerGit = new GithubAuthProvider;
 
 export const auth = getAuth(app);  
+  
+export const signInWithGoogle = () => {
+    signInWithRedirect(auth, provider)
+  };
+
+export const signInWithGitHub = () => {
+    signInWithRedirect(auth, providerGit)
+  };  
