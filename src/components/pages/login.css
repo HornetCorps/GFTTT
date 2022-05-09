@@ -44,6 +44,34 @@
   text-align: center;
 }
 
+.login > button3 {
+  width: 150px;
+  height: 6vh;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #eda800;
+  font-size: 17px;
+  text-align: center;
+}
+
+.login > button4 {
+  width: 150px;
+  height: 6vh;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #eda800;
+  font-size: 17px;
+  text-align: center;
+}
+
 .login > button2 {
   width: 150px;
   height: 4vh;

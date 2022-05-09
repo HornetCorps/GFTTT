@@ -2,7 +2,7 @@ import '../../App.css';
 import './login.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
-import {auth} from "../../firebase-config";
+import {auth , signInWithGitHub, signInWithGoogle} from "../../firebase-config";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
 export default function Login({user}) {
@@ -52,7 +52,12 @@ export default function Login({user}) {
                 setLoginPassword(e.target.value);
             }}
         />
+
         <button onClick={onSubmit}>Login</button>
+
+        <button3 onClick={signInWithGoogle}>Sign In With Google</button3> 
+
+        <button4 onClick={signInWithGitHub}>Sign In With Github</button4>
 
         <button2 onClick={logout}> Sign Out</button2>
 
