@@ -38,6 +38,41 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!!" });
 });
 
+app.post('/api/saveProfile', cors(), (req, res)=>{
+  client.connect();
+  const table = client
+                .db("GFTTT")
+                .collection("profileInfo");
+  table.updateOne({userID:req.body.userID},{$set: req.body}, {upsert:true})
+  //table.insertOne(req.body);
+})
+
+app.post('/api/deleteCharacter', cors(), (req, res)=>{
+  client.connect();
+  const table = client
+                .db("GFTTT")
+                .collection("characters");
+  table.deleteOne(req.body, 
+                   (err, data) => { 
+                     if(err) {console.log(err);}
+                     else { 
+                       console.log(data.deletedCount)
+                     }
+                   }
+                  );
+  }
+)
+
+app.get('/api/getProfile/:userID', cors(), (req,res)=>{
+  client.connect();
+  const table = client
+                  .db("GFTTT")
+                  .collection("profileInfo");
+  console.log(req.params);
+  //console.log(table.findOne({userID: req.params.userID}))
+  res.json(table.findOne({userID: req.params.userID}))
+})
+
 app.post('/api/saveCharacter', cors(), (req, res)=>{
   client.connect();
   const table = client
@@ -442,6 +477,13 @@ app.get('/api/background-get', cors(), (req, res)=>{
     }
   });
 });
+
+app.get('/api/name-get', cors(), (req,res)=>{
+  client.connect();
+  const table = client 
+                .db("GFTTT")
+                .collection("name")
+})
 
 app.post('/api/login', cors(), (req, res)=>{
   const username = req.body.username

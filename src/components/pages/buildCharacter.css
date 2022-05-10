@@ -13,6 +13,7 @@
   flex-direction: column;
 }
 
+/*No logner needed?*/
 #box1 {
   height: 60px;
   line-height: 30px;
@@ -21,6 +22,32 @@
   vertical-align: center;
   margin-top: 20px;
   padding-top: 10px;
+}
+
+#MiscPane{
+  display: inline-block;
+  margin-left: 18%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.miscInput{
+  width: 150px;
+  font-size: 15px;
+  text-align: center;
+  background-color: #d2c693;
+  margin-left: 5px;
+}
+
+.miscInputButton{
+  background-color: #d2c693;
+  margin-right: 30px;
+}
+
+.miscInputButton:hover{
+  background-color: #c2b786;
+  cursor: pointer;
 }
 
 #box2 {
@@ -264,6 +291,7 @@
   font-size: 15px;
   margin: 10px;
   padding: 10px;
+  max-width: 100px;
 }
 
 .flavorsButton:hover{
@@ -272,9 +300,7 @@
 }
 
 .flavors-form{
-  display:flex;
-  align-items: center;
-  justify-content: center;
+  display:grid;
 }
 
 .personalityTraits {
