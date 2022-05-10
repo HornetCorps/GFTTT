@@ -13,35 +13,27 @@ class OtherModifierSource {
 }
 
 export class SkillObject {
-    name; proficiency; abilityModifier
+    name; #proficiency; #abilityModifier
     #OtherModifierSources;
     #proficiencyTypes = ['None', 'Half', 'Proficient',  'Expert']
 
     constructor(name) {
         this.name = name;
-        this.proficiency = this.#proficiencyTypes[0];
+        this.#abilityModifier = 0;
+        this.#proficiency = this.#proficiencyTypes[0];
         this.#OtherModifierSources = [];
     }
 
-    addOtherModifierSource(sourceName, amount) {
-        let modifierSource = new OtherModifierSource(sourceName, amount);
-        this.#OtherModifierSources.concat(modifierSource)
-    }
-
-    removeOtherModifierSource(sourceName) {
-        this.#OtherModifierSources.filter(obj => obj.sourceName !== sourceName);
-    }
-
     get skillModifier() {
-        return this.#OtherModifierSources.reduce(this.#addOtherModifiersValues, 0)
-            + this.abilityModifier + this.#getProficiencyModifier();
+        return this.#OtherModifierSources.reduce(this.addOtherModifiersValues, 0)
+            + this.#abilityModifier + this.getProficiencyModifier();
     }
 
-    #addOtherModifiersValues(total, num) {
+    addOtherModifiersValues(total, num) {
         return total + num;
     }
 
-    #getProficiencyModifier() {
+    getProficiencyModifier() {
         switch (this.proficiency) {
             case 'None':
                 return 0;
@@ -57,7 +49,35 @@ export class SkillObject {
         }
     }
 
+    // TODO: Get this to set the correct proficiency and add ability to have half proficiencies
+    set abilityModifier(amount) {
+        this.#abilityModifier = amount;
+        this.proficiency = amount;
+    }
+
     set proficiency(value) {
-        this.proficiency = this.#proficiencyTypes[value];
+        if (value < 0) {
+            this.#proficiency = this.#proficiencyTypes[0];
+            return;
+        }
+
+        if (value > 2) {
+            this.#proficiency = this.#proficiencyTypes[2];
+            return;
+        }
+
+        this.#proficiency = this.#proficiencyTypes[value];
+    }
+    get proficiency() {
+        return this.#proficiency;
+    }
+
+    addOtherModifierSource(sourceName, amount) {
+        let modifierSource = new OtherModifierSource(sourceName, amount);
+        this.#OtherModifierSources.concat(modifierSource)
+    }
+
+    removeOtherModifierSource(sourceName) {
+        this.#OtherModifierSources.filter(obj => obj.sourceName !== sourceName);
     }
 }
