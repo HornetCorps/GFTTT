@@ -2,12 +2,18 @@ require('dotenv').config()
 
 // DB Connection URI, both local and dev
 //const uri = process.env.DB_URL
-const uri = "mongodb://localhost:27017";
+const uri = process.env.DB_URL || "mongodb://localhost:27017";
 
 // Create a new MongoClient
-const { MongoClient } = require("mongodb");
+const { MongoClient, Db } = require("mongodb");
 const client = new MongoClient(uri);
-
+client.connect()
+      .then((client) =>
+        {console.log("Connected to database client.")})
+      .catch((err) =>
+        {console.log("Unable to start database client.\n" + err)});
+const charTable = new Db(client, "GFTTT").collection("characters");
+const profileTable = new Db(client, "GFTTT").collection("profileInfo");
 //Create a new mongoose connection to specific database for mongoose models
 // const database = "/GFTTT"
 // const mongooseURI = uri + database
@@ -39,69 +45,62 @@ app.get("/api", (req, res) => {
 });
 
 app.post('/api/saveProfile', cors(), (req, res)=>{
-  client.connect();
-  const table = client
-                .db("GFTTT")
-                .collection("profileInfo");
-  table.updateOne({userID:req.body.userID},{$set: req.body}, {upsert:true})
-  //table.insertOne(req.body);
+  profileTable.updateOne({userID:req.body.userID},{$set: req.body},
+    {upsert:true}, (ok, err) => {
+      if(err) {console.log("Unable to save profile.\n"+req.body+err)}
+      else {console.log("Saved profile for " + req.body.userID)}
+    });
+})
+
+app.get('/api/getProfile/:userID', cors(), (req,res)=>{
+  profileTable.find({userID: req.params.userID}).toArray(
+    (err, data) => {
+      if(err) {console.log("Unable to get profile."+err)}
+      else {
+        console.log("Profile data requested for "+req.params.userID);
+        res.json(data);
+      }
+    }
+  );
 })
 
 app.post('/api/deleteCharacter', cors(), (req, res)=>{
-  client.connect();
-  const table = client
-                .db("GFTTT")
-                .collection("characters");
-  table.deleteOne(req.body, 
-                   (err, data) => { 
+  charTable.deleteOne(req.body,
+                   (err, data) => {
                      if(err) {console.log(err);}
-                     else { 
-                       console.log(data.deletedCount)
+                     else if (data.deletedCount > 0){
+                       console.log("Deleted character.")
+                     } else {
+                       console.log("Character not found for deletion.")
                      }
                    }
                   );
   }
 )
 
-app.get('/api/getProfile/:userID', cors(), (req,res)=>{
-  client.connect();
-  const table = client
-                  .db("GFTTT")
-                  .collection("profileInfo");
-  console.log(req.params);
-  //console.log(table.findOne({userID: req.params.userID}))
-  res.json(table.findOne({userID: req.params.userID}))
-})
-
 app.post('/api/saveCharacter', cors(), (req, res)=>{
-  client.connect();
-  const table = client
-                .db("GFTTT")
-                .collection("characters");
-  table.countDocuments({userID: req.body.userID,
+  charTable.countDocuments({userID: req.body.userID,
                   characterName: req.body.characterName,
                   className: req.body.className,
-                  level: req.body.level},
+                  level: req.body.level,
+                  race: req.body.race},
                 (err, res)=> {
                   if(err) {console.log(err);}
                   else if (res > 0) {console.log("Duplicate, skipping.");}
                   else {
-                    table.insertOne(req.body);
+                    charTable.insertOne(req.body);
+                    console.log("Character saved.")
                   }
           })
   }
 )
 
 app.get('/api/getCharacter/:userID', cors(), (req,res)=>{
-  client.connect();
-  const table = client
-                .db("GFTTT")
-                .collection("characters");
-  console.log(req.params);
-  table.find({userID: req.params.userID}).toArray(
+  charTable.find({userID: req.params.userID}).toArray(
     (err, data) => {
       if(err) {console.log(err);}
       else {
+        console.log("Character list requested for "+req.params.userID);
         res.json(data);
       }
     }
@@ -480,7 +479,7 @@ app.get('/api/background-get', cors(), (req, res)=>{
 
 app.get('/api/name-get', cors(), (req,res)=>{
   client.connect();
-  const table = client 
+  const table = client
                 .db("GFTTT")
                 .collection("name")
 })

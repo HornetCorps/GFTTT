@@ -37,21 +37,20 @@ export default function Profile({userID}) {
                 const res = await fetch("http://localhost:5000/api/getProfile/"+(userID.uid));
                 if(!res.ok) throw Error("Failed to get data.");
                 const info = await res.json();
-                console.log(info.toString)
-                setProfileName(info.profileName || "");
-                setAboutMe(info.aboutMe || "");
+                setProfileName(info[0].profileName || "");
+                setAboutMe(info[0].aboutMe || "");
             } catch(err) {
                 console.log(err);
             }
         }
-        setTimeout(()=> getProfileInfo(), 10);
+        setTimeout(()=> getProfileInfo(), 100);
     }, [userID]);
 
     return <div class="profile">
-        <ProfilePane 
+        <ProfilePane
             pN = {[profileName,setProfileName]}
             aM = {[aboutMe, setAboutMe]}
         />
-        <button onClick={onSubmit}>SAVE</button>     
+        <button onClick={onSubmit}>SAVE</button>
     </div>
 }
