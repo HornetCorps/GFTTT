@@ -178,7 +178,8 @@ export default function BuildCharacter({userID, inventoryData}) {
                 return;
             }
         }
-            await fetch("http://localhost:5000/api/saveCharacter", {
+            await fetch((process.env.BACKEND_URL || "http://localhost:5000")
+                      +"/api/saveCharacter", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
