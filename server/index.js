@@ -47,15 +47,18 @@ app.get("/api", (req, res) => {
 app.post('/api/saveProfile', cors(), (req, res)=>{
   profileTable.updateOne({userID:req.body.userID},{$set: req.body},
     {upsert:true}, (err, ok) => {
-      if(err) {console.log("Unable to save profile.\n"+req.body+err)}
-      else {console.log("Saved profile for " + req.body.userID)}
+      if(err) {console.log("Unable to save profile.\n"+req.body+err);
+        res.sendStatus(500);}
+      else {console.log("Saved profile for " + req.body.userID);
+        res.sendStatus(200);}
     });
 })
 
 app.get('/api/getProfile/:userID', cors(), (req,res)=>{
   profileTable.find({userID: req.params.userID}).toArray(
     (err, data) => {
-      if(err) {console.log("Unable to get profile."+err)}
+      if(err) {console.log("Unable to get profile."+err);
+        res.sendStatus(500);}
       else {
         console.log("Profile data requested for "+req.params.userID);
         res.json(data);
@@ -67,9 +70,10 @@ app.get('/api/getProfile/:userID', cors(), (req,res)=>{
 app.post('/api/deleteCharacter', cors(), (req, res)=>{
   charTable.deleteOne(req.body,
                    (err, data) => {
-                     if(err) {console.log(err);}
+                     if(err) {console.log(err);
+                        res.sendStatus(500);}
                      else if (data.deletedCount > 0){
-                       console.log("Deleted character.")
+                       console.log("Deleted character.");
                      } else {
                        console.log("Character not found for deletion.")
                      }
@@ -85,7 +89,7 @@ app.post('/api/saveCharacter', cors(), (req, res)=>{
                   level: req.body.level,
                   race: req.body.race},
                 (err, res)=> {
-                  if(err) {console.log(err);}
+                  if(err) {console.log(err); res.sendStatus(500);}
                   else if (res > 0) {console.log("Duplicate, skipping.");}
                   else {
                     charTable.insertOne(req.body);
@@ -98,7 +102,7 @@ app.post('/api/saveCharacter', cors(), (req, res)=>{
 app.get('/api/getCharacter/:userID', cors(), (req,res)=>{
   charTable.find({userID: req.params.userID}).toArray(
     (err, data) => {
-      if(err) {console.log(err);}
+      if(err) {console.log(err); res.sendStatus(500);}
       else {
         console.log("Character list requested for "+req.params.userID);
         res.json(data);

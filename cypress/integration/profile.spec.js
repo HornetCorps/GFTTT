@@ -5,7 +5,7 @@ describe('The Profile Page', () => {
         cy.get('[type="text"]').type('testing@email.com')
         cy.get('[type="password"]').type('password')
         cy.get('.login > button').click()
-        cy.get('.login > :nth-child(9)').should('contain', 'testing@email.com')
+        cy.get('.login > :nth-child(11)').should('contain', 'testing@email.com')
     })
 
     it('should not initially have profile page info', () => {
