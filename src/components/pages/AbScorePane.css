@@ -1,0 +1,39 @@
+#AbScorePane {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+  width: 200px;
+}
+
+#AbScoreTopBar {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  align-self: flex-end;
+  gap: 10px;
+}
+
+.AbScore {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+}
+
+.statIcon {
+  height: 50px;
+  width: 50px;
+}
+
+.AbScoreMid {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+}
+
+.AbScoreMid > input {
+  margin: 0;
+  font-size: 16pt;
+}

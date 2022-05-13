@@ -63,18 +63,6 @@
   margin-left: 10%;
 }
 
-#AbScorePane {
-  flex-grow: 0.3;
-  flex-direction: column;
-  text-align: center;
-  display: table;
-}
-
-#AbScoreTopBar {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
 #SkillsPane {
   flex-grow: 0.3;
   flex-direction: column;
@@ -225,17 +213,6 @@
   background-color: #d2c693;
   margin-right: 30px;
   margin-left: 5px;
-}
-.stats {
-  width: 50px;
-  font-size: 15px;
-  text-align: center;
-  background-color: #d2c693;
-  margin-bottom: 20px;
-}
-.statIcon {
-  height: 50px;
-  width: 50px;
 }
 
 .armorClass {
