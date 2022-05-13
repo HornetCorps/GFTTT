@@ -87,6 +87,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
     return <> 
         Character Name:
         <input
+            id="miscPaneCharacterName"
             class='miscInput'
             placeholder={currCharText || "Type here."}
             type='text'
@@ -97,6 +98,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
         <br></br>
         Player Name:
         <input
+            id="miscPanePlayerName"
             class='miscInput'
             placeholder={currPlayerText || "Type here."}
             type='text'
@@ -107,6 +109,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
         <br></br>
         Class:
         <input
+            id="miscPaneClass"
             style={{marginRight:"20px"}}
             class='miscInput'
             placeholder={currClassText || "Type here."}
@@ -117,6 +120,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
         />
         Race:
         <input
+            id="miscPaneRace"
             style={{marginRight:"20px"}}
             class='miscInput'
             placeholder={currRaceText || "Type here."}
@@ -147,6 +151,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
         <br></br>
         Level:
         <input
+            id="miscPaneLevel"
             style={{marginRight:"20px"}}
             class='miscInput'
             placeholder={currLevelText || "Type here."}
@@ -165,7 +170,7 @@ function TextInputHandler({saveCharText, currCharText, savePlayerText, currPlaye
             onSubmit={onSubmit}
         />
         <br></br>
-        <button class='miscInputButton' type="submit" onClick={onSubmit} >Update</button>
+        <button id="miscPaneUpdate" class='miscInputButton' type="submit" onClick={onSubmit} >Update</button>
     </>
     
 }
@@ -279,7 +284,8 @@ export default function MiscPane({cName, cClass, cLevel, cRace, cBackground, cAl
                             <span style={{marginRight:"83px"}}>Level: {cLevel}</span>
                             <span>Experience Points: {cExperience}</span>
                             <br></br>
-                            <img 
+                            <img
+                                id="miscPaneEdit"
                                 class="editButton" 
                                 src={editIcon}
                                 alt="Edit Information"
