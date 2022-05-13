@@ -6,11 +6,8 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/user-event": "^12.8.3",
-<<<<<<< Updated upstream
     "cypress": "^9.6.1",
-=======
     "@testing-library/react": "^11.2.7",
->>>>>>> Stashed changes
     "firebase": "^9.6.11",
     "mongoose": "^6.2.3",
     "react": "^17.0.2",
