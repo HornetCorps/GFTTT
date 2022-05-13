@@ -50,7 +50,7 @@ export default function Profile({userID}) {
         <ProfilePane
             pN = {[profileName,setProfileName]}
             aM = {[aboutMe, setAboutMe]}
+            buttonFunc={onSubmit}
         />
-        <button onClick={onSubmit}>SAVE</button>
     </div>
 }

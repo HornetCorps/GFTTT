@@ -46,7 +46,7 @@ app.get("/api", (req, res) => {
 
 app.post('/api/saveProfile', cors(), (req, res)=>{
   profileTable.updateOne({userID:req.body.userID},{$set: req.body},
-    {upsert:true}, (ok, err) => {
+    {upsert:true}, (err, ok) => {
       if(err) {console.log("Unable to save profile.\n"+req.body+err)}
       else {console.log("Saved profile for " + req.body.userID)}
     });

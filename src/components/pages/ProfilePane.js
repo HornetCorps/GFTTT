@@ -53,7 +53,7 @@ function TextInputHandler({saveName, currName, saveAboutMe, currAboutMe}) {
 }
 
 
-export default function ProfilePane({pN, aM}) {
+export default function ProfilePane({pN, aM, buttonFunc}) {
 
     const [editing, setEditing] = useState(false);
     const [editingAboutMe, setEditingAboutMe] = useState(false);
@@ -94,8 +94,8 @@ export default function ProfilePane({pN, aM}) {
                 <div>{aM[0]}</div>
             </>
             }
-        
-        
+
+
         </div>;
 
     }
@@ -109,6 +109,7 @@ export default function ProfilePane({pN, aM}) {
                 <div id="Box3">
                 <ProfileTopBar />
                 <AboutMe />
+                <button onClick={buttonFunc}>SAVE</button>
                 </div>
             </div>
         </div>
