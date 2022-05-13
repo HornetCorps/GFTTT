@@ -296,7 +296,7 @@ export default function MiscPane({cName, cClass, cLevel, cRace, cBackground, cAl
         </>
   }
 
-    return <div id="MiscPane">
+    return <div id="MiscPane" data-testid="misc-pane">
         <Misc />
     </div>
 }

@@ -24,41 +24,41 @@ function Navbar() {
         <>
           <nav data-testid="Navbar" className="navbar">
               <div className="navbar-container">
-                  <Link to="/" className="navbar-logo" onClick={closeMobileMenu}> 
+                  <Link to="/" className="navbar-logo" data-testid="title" onClick={closeMobileMenu}> 
                    Goblin Forge Table Top Tools
                    <i class="fas fa-gavel"></i>
                   </Link>
                   <div className='menu-icon' onClick={handleClick}>
                       <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                   </div>
-                  <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                  <ul className={click ? 'nav-menu active' : 'nav-menu'} data-testid="nav-menu">
                       <li className='nav-item'>
-                          <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Home
                           </Link>
                       </li>
                       <li className='nav-item'>
-                          <Link to='/inventory' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/inventory' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Compendium
                           </Link>
                       </li>
                       <li className='nav-item'>
-                          <Link to='/tools' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/tools' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Tools
                           </Link>
                       </li>
                       <li className='nav-item'>
-                          <Link to='/community' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/community' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Community
                           </Link>
                       </li>
                       <li className='nav-item'>
-                          <Link to='/profile' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/profile' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Profile
                           </Link>
                       </li>
                       <li className='nav-item'>
-                          <Link to='/help' className='nav-links' onClick={closeMobileMenu}>
+                          <Link to='/help' className='nav-links' data-testid="nav-links" onClick={closeMobileMenu}>
                               Help
                           </Link>
                       </li>

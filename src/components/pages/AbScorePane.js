@@ -17,10 +17,11 @@ import manualEntry from '../images/manualIcon.svg'
 import incButton from '../images/inc.svg'
 import decButton from '../images/dec.svg'
 
-const rollScore = (() => {
-  const d6 = (() => (1 + Math.floor(Math.random() * 6)));
-  let rolls = [d6(), d6(), d6(), d6()];
-  return rolls.sort().slice(1).reduce((sum, x) => sum + x, 0);
+
+export const rollScore = (() => {
+  const d6 = (() => (1 + Math.floor(Math.random() * 6))); 
+  let rolls = [d6(), d6(), d6(), d6()]; 
+  return rolls.sort().slice(1).reduce((sum, x) => sum + x, 0); 
 });
 
 const modOf = ((x) => Math.floor((x - 10) / 2));
@@ -36,17 +37,17 @@ export default function AbScorePane({ str, dex, con, int, wis, cha }) {
     { key: 4, name: "Wisdom", logo: wisLogo, val: wis[0], updater: wis[1] },
     { key: 5, name: "Charisma", logo: chaLogo, val: cha[0], updater: cha[1] }
   ];
-
+  
   function swapScore(i, j) {
     const temp = scores[i].val;
     scores[i].updater(scores[j].val);
     scores[j].updater(temp);
   }
-
+  
   function swapDown(i) {  // the visual direction down, not the lower index
     swapScore(i, (i+1) % 6);
   }
-
+  
   function swapUp(i) {
     swapScore(i, (i-1+6) % 6);
   }
@@ -138,7 +139,7 @@ export default function AbScorePane({ str, dex, con, int, wis, cha }) {
 
   function scorePtBuy(score) {
     const enoughPtsToInc = (n) => (remainingPoints() >= 2
-                                || (remainingPoints() > 0 && n < 14));
+                                || (remainingPoints() > 0 && n < 13));
     const inc = (n) => (enoughPtsToInc(n) ? Math.min(n+1, 15) : n);
     const dec = (n) => (Math.max(n-1, 8));
 

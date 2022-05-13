@@ -6,7 +6,11 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/user-event": "^12.8.3",
+<<<<<<< Updated upstream
     "cypress": "^9.6.1",
+=======
+    "@testing-library/react": "^11.2.7",
+>>>>>>> Stashed changes
     "firebase": "^9.6.11",
     "mongoose": "^6.2.3",
     "react": "^17.0.2",
@@ -18,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --silent --json --outputFile=test-results.json /components/__tests__/*",
     "eject": "react-scripts eject",
     "devstart": "nodemon script.js"
   },
@@ -42,6 +46,9 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.7",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/user-event": "^14.2.0",
     "nodemon": "^2.0.15"
   }
 }

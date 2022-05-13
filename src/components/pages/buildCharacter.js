@@ -336,7 +336,7 @@ export default function BuildCharacter({userID, inventoryData}) {
                     <br/ >
                     </div>
                 </div>
-                <div id="box9">
+                <div id="box9" data-testid="button-options">
                     <button class="saveButton" onClick={onSubmit}>Save</button>
                     <button class="cancelButton">Cancel</button>
                     <ExportButton data={getCharacterStruct()} />

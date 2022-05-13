@@ -7,8 +7,8 @@ import { LoginButton } from './LoginButton';
 function HeroSection() {
     return (
         <div className='hero-container' data-testid="hero-container">
-            <h1>Welcome</h1>
-            <h2>Start Your Adventure Now</h2>
+            <h1 role='first-header'>Welcome</h1>
+            <h2 role='second-header'>Start Your Adventure Now</h2>
             <div className="hero-btns">
                 <RegisterButton className='regbtns' buttonStyle='btn--outline' buttonSize='btn--large'> Register </RegisterButton>
                 <LoginButton className='logibtns' buttonStyle='btn--outline' buttonSize='btn--large'>&nbsp; Login &nbsp; </LoginButton>

@@ -74,11 +74,11 @@ export default function Inventory({ userID, setInventoryData }) {
     }
 
     return <div className='inventory'>
-        <h1>My Character</h1>
+        <h1 data-testid="compendium-title">My Character</h1>
         <div class='characters-gallery'>
             <CharacterGallery />
         </div>
-        <div className='build-button'>
+        <div className='build-button' data-testid="build-button">
             <BuildButton onClick={() => {setInventoryData({})}}>Build Character</BuildButton>
         </div>
     </div>

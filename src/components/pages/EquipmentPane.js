@@ -84,7 +84,7 @@ export default function EquipmentPane({equipment, setEquipment}) {
   }
 
   return <div id="EquipmentPane">
-    <EquipmentTopBar/>
+    <EquipmentTopBar data-testid="equipment-edit"/>
     <Equipment />
 
 
