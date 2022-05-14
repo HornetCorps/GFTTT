@@ -1,8 +1,7 @@
-require('dotenv').config()
-
 // DB Connection URI, both local and dev
 //const uri = process.env.DB_URL
 const uri = process.env.DB_URL || "mongodb://localhost:27017";
+console.info(uri);
 
 // Create a new MongoClient
 const { MongoClient, Db } = require("mongodb");
@@ -41,10 +40,12 @@ app.use(express.json());
 
 //API Functions
 app.get("/api", (req, res) => {
+  console.log("Someone said hello!");
   res.json({ message: "Hello from server!!" });
 });
 
 app.post('/api/saveProfile', cors(), (req, res)=>{
+  console.log("Save Profile requested.");
   profileTable.updateOne({userID:req.body.userID},{$set: req.body},
     {upsert:true}, (err, ok) => {
       if(err) {console.log("Unable to save profile.\n"+req.body+err);
@@ -55,6 +56,7 @@ app.post('/api/saveProfile', cors(), (req, res)=>{
 })
 
 app.get('/api/getProfile/:userID', cors(), (req,res)=>{
+  console.log("Get Profile requested.");
   profileTable.find({userID: req.params.userID}).toArray(
     (err, data) => {
       if(err) {console.log("Unable to get profile."+err);
@@ -68,6 +70,7 @@ app.get('/api/getProfile/:userID', cors(), (req,res)=>{
 })
 
 app.post('/api/deleteCharacter', cors(), (req, res)=>{
+  console.log("Delete Character requested.");
   charTable.deleteOne(req.body,
                    (err, data) => {
                      if(err) {console.log(err);
@@ -83,6 +86,7 @@ app.post('/api/deleteCharacter', cors(), (req, res)=>{
 )
 
 app.post('/api/saveCharacter', cors(), (req, res)=>{
+  console.log("Save Character requested.");
   charTable.countDocuments({userID: req.body.userID,
                   characterName: req.body.characterName,
                   className: req.body.className,
@@ -100,6 +104,7 @@ app.post('/api/saveCharacter', cors(), (req, res)=>{
 )
 
 app.get('/api/getCharacter/:userID', cors(), (req,res)=>{
+  console.log("All Characters requested.");
   charTable.find({userID: req.params.userID}).toArray(
     (err, data) => {
       if(err) {console.log(err); res.sendStatus(500);}
