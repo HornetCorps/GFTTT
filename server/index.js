@@ -87,6 +87,7 @@ app.post('/api/deleteCharacter', cors(), (req, res)=>{
 
 app.post('/api/saveCharacter', cors(), (req, res)=>{
   console.log("Save Character requested.");
+  try {
   charTable.countDocuments({userID: req.body.userID,
                   characterName: req.body.characterName,
                   className: req.body.className,
@@ -100,7 +101,8 @@ app.post('/api/saveCharacter', cors(), (req, res)=>{
                     console.log("Character saved.")
                   }
           })
-  }
+  } catch(e) {console.log("We failed in Save Character" , e); res.sendStatus(418);}
+}
 )
 
 app.get('/api/getCharacter/:userID', cors(), (req,res)=>{
