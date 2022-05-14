@@ -17,7 +17,8 @@ export default function Profile({userID}) {
                                     profileName: profileName,
                                     aboutMe: aboutMe};
 
-        await fetch("http://localhost:5000/api/saveProfile", {
+        await fetch((process.env.REACT_APP_BACKEND_URL || "http://localhost:5000")
+          + "/api/saveProfile", {
             method: "POST",
                headers: {
                 'Accept': 'application/json',
@@ -34,7 +35,8 @@ export default function Profile({userID}) {
     useEffect(()=> {
         const getProfileInfo = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/getProfile/"+(userID.uid));
+                const res = await fetch((process.env.REACT_APP_BACKEND_URL || "http://localhost:5000")
+                  + "/api/getProfile/" + (userID.uid));
                 if(!res.ok) throw Error("Failed to get data.");
                 const info = await res.json();
                 setProfileName(info[0].profileName || "");

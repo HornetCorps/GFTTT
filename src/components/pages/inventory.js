@@ -10,7 +10,8 @@ export default function Inventory({ userID, setInventoryData }) {
     useEffect(()=> {
       const getCharacterList = async () => {
         try {
-          const res = await fetch("http://localhost:5000/api/getCharacter/"+(userID.uid));
+          const res = await fetch((process.env.REACT_APP_BACKEND_URL || "http://localhost:5000")
+            + "/api/getCharacter/" + (userID.uid));
           if(!res.ok) throw Error("Failed to get data.");
           const chars = await res.json();
           setCharList(chars);
@@ -27,7 +28,8 @@ export default function Inventory({ userID, setInventoryData }) {
                                     charClass: character.class,
                                     level: character.level,
                                     race: character.race};
-            await fetch("http://localhost:5000/api/deleteCharacter", {
+            await fetch((process.env.REACT_APP_BACKEND_URL || "http://localhost:5000")
+              + "/api/deleteCharacter", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -53,8 +55,8 @@ export default function Inventory({ userID, setInventoryData }) {
                     <BuildButton
                         onClick={() => {setInventoryData({name: character.characterName, class: character.charClass, level: character.level, race: character.race })}}
                     >View</BuildButton>
-                    <DeleteButton 
-                        onClick={() => {onSubmit(character); setCharList((charList) => charList.filter((x) => x !== character))}}    
+                    <DeleteButton
+                        onClick={() => {onSubmit(character); setCharList((charList) => charList.filter((x) => x !== character))}}
                     >Delete</DeleteButton>
                 </div>
             </div>

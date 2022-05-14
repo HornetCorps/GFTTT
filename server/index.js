@@ -1,11 +1,14 @@
 // DB Connection URI, both local and dev
 //const uri = process.env.DB_URL
 const uri = process.env.DB_URL || "mongodb://localhost:27017";
-console.info(uri);
 
 // Create a new MongoClient
 const { MongoClient, Db } = require("mongodb");
-const client = new MongoClient(uri);
+const client = new MongoClient(uri,
+  (process.env.DB_URL)
+    ? {tls: true, tlsCAFile: 'ca-certificate.crt'}
+    : {});
+
 client.connect()
       .then((client) =>
         {console.log("Connected to database client.")})
