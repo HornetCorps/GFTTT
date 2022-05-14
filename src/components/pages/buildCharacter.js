@@ -178,7 +178,7 @@ export default function BuildCharacter({userID, inventoryData}) {
                 return;
             }
         }
-            await fetch((process.env.BACKEND_URL || "http://localhost:5000")
+            await fetch((process.env.REACT_APP_BACKEND_URL || "http://localhost:5000")
                       +"/api/saveCharacter", {
                 method: "POST",
                 headers: {
